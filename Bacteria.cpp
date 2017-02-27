@@ -15,8 +15,12 @@ float Bacteria::p_death = 0.02;
 // ===========================================================================
 Bacteria::Bacteria() {
     w = 0;
+    genotype = 0;
 }
 
+Bacteria::Bacteria(int genotype_) {
+    genotype = genotype_;
+}
 
 // ===========================================================================
 //                              Destructor

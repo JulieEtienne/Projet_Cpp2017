@@ -8,6 +8,7 @@ class Bacteria {
         //                          Constructors
         // ===================================================================
         Bacteria();
+        Bacteria(int genotype_);
 
         // ===================================================================
         //                          Destructor
@@ -23,6 +24,7 @@ class Bacteria {
         static float p_death;
 
         float w; // Bacteria's fitness
+        int genotype; // Bacteria's genotype
 
 };
 
