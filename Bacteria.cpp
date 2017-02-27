@@ -21,6 +21,9 @@ float Bacteria::p_death = 0.02;
 Bacteria::Bacteria() {
     w = 0;
     genotype = 0;
+    A = 0;
+    B = 0;
+    C = 0;
 }
 
 Bacteria::Bacteria(int genotype_) {
