@@ -25,9 +25,9 @@ class Bacteria {
 
         float w; // Bacteria's fitness
         int genotype; // Bacteria's genotype
-        float A;
-        float B;
-        float C;
+        float* A;
+        float* B;
+        float* C;
 
 };
 

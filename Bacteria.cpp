@@ -21,9 +21,9 @@ float Bacteria::p_death = 0.02;
 Bacteria::Bacteria() {
     w = 0;
     genotype = 0;
-    A = 0;
-    B = 0;
-    C = 0;
+    A = new float(0);
+    B = new float(0);
+    C = new float(0);
 }
 
 Bacteria::Bacteria(int genotype_) {
@@ -34,4 +34,7 @@ Bacteria::Bacteria(int genotype_) {
 //                              Destructor
 // ===========================================================================
 Bacteria::~Bacteria() {
+    delete A;
+    delete B;
+    delete C;
 }
