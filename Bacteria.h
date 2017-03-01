@@ -18,7 +18,7 @@ class Bacteria {
         // ===================================================================
         //                          Public Methods
         // ===================================================================
-        virtual void metabolism(float& a_out) = 0;
+        virtual void metabolism(float& out) = 0;
         virtual void fitness() = 0;
 
     protected :
