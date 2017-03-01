@@ -28,6 +28,7 @@ class BacterieL : public Bacteria {
         //                          Public Methods
         // ===================================================================
         void metabolism(float& a_out);
+        void fitness();
 
     protected :
         // ===================================================================
