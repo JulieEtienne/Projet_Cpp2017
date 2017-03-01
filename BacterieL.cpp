@@ -17,12 +17,11 @@ BacterieL::BacterieL() : Bacteria(1) {
 BacterieL::~BacterieL() {
 }
 
-
 // ===========================================================================
 //                             Public Methods
 // ===========================================================================
-BacterieL::metabolism(float a_out) { //passer adresse de a_out en référence
-    float* a_out_tmp = new float(a_out)
-    a_out_tmp = a_out_tmp * (1 - rAA);
-    return a_out_tmp;
+void BacterieL::metabolism(float& a_out) {
+    a_out *= (1 - rAA);
+    *A = a_out * rAA - (*A) * (1 - rAB);
+    *B = (*A) * rAB + (*B);
 }
