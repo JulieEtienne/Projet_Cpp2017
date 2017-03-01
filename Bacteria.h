@@ -15,6 +15,12 @@ class Bacteria {
         // ===================================================================
         virtual ~Bacteria();
 
+        // ===================================================================
+        //                          Public Methods
+        // ===================================================================
+        virtual void metabolism(float& a_out) = 0;
+        virtual void fitness() = 0;
+
     protected :
         // ===================================================================
         //                           Attributes
@@ -23,7 +29,7 @@ class Bacteria {
         static float p_mut;
         static float p_death;
 
-        float w; // Bacteria's fitness
+        float* w; // Bacteria's fitness
         int genotype; // Bacteria's genotype
         float* A;
         float* B;

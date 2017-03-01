@@ -19,7 +19,7 @@ float Bacteria::p_death = 0.02;
 //                             Constructors
 // ===========================================================================
 Bacteria::Bacteria() {
-    w = 0;
+    w = new float(0);
     genotype = 0;
     A = new float(0);
     B = new float(0);
@@ -27,7 +27,11 @@ Bacteria::Bacteria() {
 }
 
 Bacteria::Bacteria(int genotype_) {
+    w = new float(0);
     genotype = genotype_;
+    A = new float(0);
+    B = new float(0);
+    C = new float(0);
 }
 
 // ===========================================================================
