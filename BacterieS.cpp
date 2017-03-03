@@ -22,10 +22,10 @@ BacterieS::~BacterieS() {
 // ===========================================================================
 void BacterieS::metabolism(float& out) {
     out *= (1 - rBB);
-    *B = out * rBB + (*B) * (1 - rBC);
-    *C = (*B) * rBC;
+    B = out * rBB + B * (1 - rBC);
+    C = B * rBC;
 }
 
 void BacterieS::fitness() {
-    *w = *C;
+    w = C;
 }
