@@ -10,6 +10,7 @@ using std::endl;
 #include "Bacteria.h"
 #include "BacterieL.h"
 #include "BacterieS.h"
+#include "Case.h"
 
 int main() {
 
