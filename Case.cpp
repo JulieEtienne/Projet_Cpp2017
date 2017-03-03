@@ -19,10 +19,13 @@ Case::Case(){
 Case::Case(int b_genotype){
     if (b_genotype == 1) {
         bac = new BacterieL();
+        printf("I am a L bacteria <3 \n");
     } else {
         bac = new BacterieS();
     }
 }
+
+
 
 // ===========================================================================
 //                             Destructor
