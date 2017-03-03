@@ -19,6 +19,9 @@ class Bacteria {
         //                        Getters
         // ===================================================================
         float get_fitness() const;
+        float get_A() const;
+        float get_B() const;
+        float get_C() const;
 
         // ===================================================================
         //                          Public Methods
@@ -34,11 +37,11 @@ class Bacteria {
         static float p_mut;
         static float p_death;
 
-        float* w; // Bacteria's fitness
+        float w; // Bacteria's fitness
         int genotype; // Bacteria's genotype
-        float* A;
-        float* B;
-        float* C;
+        float A;
+        float B;
+        float C;
 
 };
 

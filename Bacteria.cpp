@@ -19,33 +19,42 @@ float Bacteria::p_death = 0.02;
 //                             Constructors
 // ===========================================================================
 Bacteria::Bacteria() {
-    w = new float(0);
+    w = 0;
     genotype = 0;
-    A = new float(0);
-    B = new float(0);
-    C = new float(0);
+    A = 0;
+    B = 0;
+    C = 0;
 }
 
 Bacteria::Bacteria(int genotype_) {
-    w = new float(0);
+    w = 0;
     genotype = genotype_;
-    A = new float(0);
-    B = new float(0);
-    C = new float(0);
+    A = 0;
+    B = 0;
+    C = 0;
 }
 
 // ===========================================================================
 //                              Destructor
 // ===========================================================================
 Bacteria::~Bacteria() {
-    delete A;
-    delete B;
-    delete C;
 }
 
 // ===========================================================================
 //                              Getters
 // ===========================================================================
 float Bacteria::get_fitness() const {
-    return *w;
+    return w;
+}
+
+float Bacteria::get_A() const {
+    return A;
+}
+
+float Bacteria::get_B() const {
+    return B;
+}
+
+float Bacteria::get_C() const {
+    return C;
 }
