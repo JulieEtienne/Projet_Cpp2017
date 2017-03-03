@@ -5,6 +5,8 @@
 //                          Includes
 // ===========================================================================
 #include "Bacteria.h"
+#include "BacterieL.h"
+#include "BacterieS.h"
 
 class Case {
 
