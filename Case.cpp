@@ -26,6 +26,7 @@ Case::Case(float a_init){
 Case::Case(int b_genotype, float a_init){
     if (b_genotype == 1) {
         bac = new BacterieL();
+        printf("I am a L bacteria <3 \n");
     } else {
         bac = new BacterieS();
     }
@@ -33,6 +34,8 @@ Case::Case(int b_genotype, float a_init){
     B_out = 0;
     C_out = 0;
 }
+
+
 
 // ===========================================================================
 //                             Destructor

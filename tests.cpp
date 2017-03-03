@@ -17,6 +17,8 @@ int main() {
     Bacteria* bacL = new BacterieL();
     Bacteria* bacS = new BacterieS();
 
+    Case case_ = Case(1);
+
     delete bacL;
     delete bacS;
 
