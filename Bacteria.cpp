@@ -47,6 +47,10 @@ float Bacteria::get_fitness() const {
     return w;
 }
 
+int Bacteria::get_genotype() const {
+    return genotype;
+}
+
 float Bacteria::get_A() const {
     return A;
 }

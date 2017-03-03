@@ -19,6 +19,7 @@ class Bacteria {
         //                        Getters
         // ===================================================================
         float get_fitness() const;
+        int get_genotype() const;
         float get_A() const;
         float get_B() const;
         float get_C() const;
