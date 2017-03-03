@@ -56,10 +56,17 @@ float Case::get_Cout() const {
     return C_out;
 }
 
-
 // ===========================================================================
 //                             Public Methods
 // ===========================================================================
 bool Case::amI_Empty() {
     return (bac == nullptr);
+}
+
+void Case::manage_metabolism() {
+    if (bac->get_genotype() == 1) {
+        bac->metabolism(A_out);
+    } else {
+        bac->metabolism(B_out);
+    }
 }
