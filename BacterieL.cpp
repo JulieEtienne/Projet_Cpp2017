@@ -21,7 +21,7 @@ void BacterieL::metabolism(float &out)
 {
     out *= (1 - rAA);
     A = out * rAA + A * (1 - rAB);
-    B = A * rAB + B;
+    B += A * rAB;
 }
 
 void BacterieL::fitness()

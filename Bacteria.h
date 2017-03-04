@@ -27,8 +27,13 @@ class Bacteria {
         // ===================================================================
         //                          Public Methods
         // ===================================================================
-        virtual void metabolism(float& out) = 0;
-        virtual void fitness() = 0;
+        virtual void metabolism(float &out);
+        virtual void fitness();
+        virtual void P_death();
+
+        // ===================================================================
+        //                           Display
+        // ===================================================================
         virtual void display();
 
     protected :

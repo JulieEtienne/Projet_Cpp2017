@@ -21,7 +21,7 @@ void BacterieS::metabolism(float &out)
 {
     out *= (1 - rBB);
     B = out * rBB + B * (1 - rBC);
-    C = B * rBC;
+    C += B * rBC;
 }
 
 void BacterieS::fitness() 
