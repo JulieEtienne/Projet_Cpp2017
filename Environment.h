@@ -1,51 +1,47 @@
-#ifndef CASE_H
-#define CASE_H
+#ifndef ENVIRONMENT_H
+#define ENVIRONMENT_H
 
 // ===========================================================================
 //                          Includes
 // ===========================================================================
-#include "Bacteria.h"
-#include "BacterieL.h"
-#include "BacterieS.h"
+#include "Case.h"
+#include <vector>
 
-class Case {
+
+class Environment {
 
     public :
         // ===================================================================
         //                          Constructors
         // ===================================================================
-        Case();
-        Case(float a_init); //Initial glucose concentration in this case
-        Case(int b_genotype, float a_init); //Initial [glucose] and type S or L of bacteria
-
+        Environment();
         // ===================================================================
         //                          Destructor
         // ===================================================================
-        ~Case();
-
+        ~Environment();
         // ===================================================================
         //                        Getters
         // ===================================================================
-        float get_Aout() const;
-        float get_Bout() const;
-        float get_Cout() const;
+        int get_W() const;
+        int get_H() const;
+
+        // ===================================================================
+        //                        Setters
+        // ===================================================================
+        void set_W(int W_);
+        void set_H(int H_);
 
         // ===================================================================
         //                          Public Methods
         // ===================================================================
-        bool amI_Empty();
-        void manage_metabolism();
 
     protected :
         // ===================================================================
         //                          Attributes
         // ===================================================================
-        Bacteria *bac; // bac is a Bacteria
-
-        float A_out;
-        float B_out;
-        float C_out;
-
+        int W;
+        int H;
+        std::vector<Case> grid;
 };
 
 #endif // CASE_H

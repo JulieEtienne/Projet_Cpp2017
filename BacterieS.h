@@ -27,7 +27,7 @@ class BacterieS : public Bacteria {
         // ===================================================================
         //                          Public Methods
         // ===================================================================
-        virtual void metabolism(float& out) override;
+        virtual void metabolism(float &out) override;
         virtual void fitness() override;
 
     protected :

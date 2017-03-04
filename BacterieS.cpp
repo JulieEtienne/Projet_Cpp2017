@@ -7,23 +7,24 @@
 // ===========================================================================
 //                             Constructors
 // ===========================================================================
-BacterieS::BacterieS() : Bacteria(1);
+BacterieS::BacterieS() : Bacteria(1){}
 
 // ===========================================================================
 //                             Destructor
 // ===========================================================================
-BacterieS::~BacterieS() {
-}
+BacterieS::~BacterieS(){}
 
 // ===========================================================================
 //                             Public Methods
 // ===========================================================================
-void BacterieS::metabolism(float& out) {
+void BacterieS::metabolism(float &out)
+{
     out *= (1 - rBB);
     B = out * rBB + B * (1 - rBC);
     C = B * rBC;
 }
 
-void BacterieS::fitness() {
+void BacterieS::fitness() 
+{
     w = C;
 }

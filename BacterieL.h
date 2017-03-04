@@ -27,7 +27,7 @@ class BacterieL : public Bacteria
         // ===================================================================
         //                          Public Methods
         // ===================================================================
-        void metabolism(float& out) override;
+        void metabolism(float &out) override;
         void fitness() override;
 
     protected :
