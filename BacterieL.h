@@ -11,8 +11,8 @@ using std::endl;
 
 #include "Bacteria.h"
 
-class BacterieL : public Bacteria {
-
+class BacterieL : public Bacteria
+{
     public :
         // ===================================================================
         //                          Constructors
@@ -36,7 +36,6 @@ class BacterieL : public Bacteria {
         // ===================================================================
         float rAA;
         float rAB;
-
 };
 
 #endif // BacterieL_H

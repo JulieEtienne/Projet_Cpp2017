@@ -69,3 +69,23 @@ float Bacteria::get_C() const
 {
     return C;
 }
+
+// ===========================================================================
+//                              Display
+// ===========================================================================
+void Bacteria::display()
+{
+    if (genotype == 0)
+    {
+        cout << "Bacteria's genotype is L " << endl;
+    }
+    else if (genotype == 1)
+    {
+        cout << "Bacteria's genotype is S " << endl;
+    }
+    else
+    {
+        cout << "Unknown bacteria's genotype" << endl;
+    }
+}
+

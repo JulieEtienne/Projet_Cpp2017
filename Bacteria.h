@@ -29,6 +29,7 @@ class Bacteria {
         // ===================================================================
         virtual void metabolism(float& out) = 0;
         virtual void fitness() = 0;
+        virtual void display();
 
     protected :
         // ===================================================================

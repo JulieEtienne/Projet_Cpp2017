@@ -14,8 +14,10 @@ using std::endl;
 
 int main() {
 
-    Bacteria* bacL = new BacterieL();
+    Bacteria* bacL = new BacterieL(); // Pointeur car classe virtuelle pure.
     Bacteria* bacS = new BacterieS();
+    bacL->display();
+    bacS->display();
 
     Case case_ = Case(1);
 
