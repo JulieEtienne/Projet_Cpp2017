@@ -42,7 +42,7 @@ class Bacteria {
         // ===================================================================
         static float w_min; // Minimum allowed fitness value
         static float p_mut;
-        static float p_death;
+        static float p_death_;
 
         float w; // Bacteria's fitness
         int genotype; // Bacteria's genotype : 0 or 1
