@@ -27,7 +27,7 @@ class Bacteria {
         // ===================================================================
         virtual void metabolism(float &out);
         virtual void fitness();
-        virtual void P_death();
+        virtual void dead_or_alive();
 
         // ===================================================================
         //                           Display
@@ -40,7 +40,7 @@ class Bacteria {
         // ===================================================================
         static float w_min; // Minimum allowed fitness value
         static float p_mut;
-        static float p_death_;
+        static float p_death;
 
         float w; // Bacteria's fitness
         int genotype; // Bacteria's genotype : 0 or 1

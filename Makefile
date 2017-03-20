@@ -20,5 +20,5 @@ Environment.o : Environment.cpp Environment.h Case.h
 tests.o : tests.cpp Bacteria.h BacterieL.h BacterieS.h Case.h Environment.h
 	g++ -c -std=c++11 tests.cpp -o tests.o
 
-clean :
-	-rm *.o
+clean : simulation
+	rm -rf *.o simulation
