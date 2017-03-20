@@ -13,7 +13,7 @@ using namespace std;
 // ===========================================================================
 float Bacteria::w_min = 0.001;
 float Bacteria::p_mut = 0;
-float Bacteria::p_death_ = 0.02;
+float Bacteria::p_death = 0.02;
 
 // ===========================================================================
 //                             Constructors
@@ -83,16 +83,16 @@ void Bacteria::fitness()
 
 }
 
-void Bacteria::P_death()
+void Bacteria::dead_or_alive()
 {
-    float probability = 0;
-    // srand (static_cast <unsigned> (time(NULL)));
-    srand(time(NULL));
-    // probability is a float between 0 and 1 drawn randomly
-    probability = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+    double probability;     // probability is a float between 0 and 1 drawn randomly
+    for(auto i = 0;  i < 2; i++){ //for i = 0, probability doesn't change significatively
+        probability = static_cast <double>(rand()) / static_cast <double> (RAND_MAX);
+    }
+    
     cout << "Probabilité : " << probability << endl;
 
-    if (probability <= p_death_)
+    if (probability <= p_death)
     {
         is_alive = false;
     }

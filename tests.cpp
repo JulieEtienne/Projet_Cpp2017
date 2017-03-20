@@ -15,12 +15,13 @@ using std::endl;
 
 
 int main() {
+	srand(time(NULL));     // srand (static_cast <unsigned> (time(NULL)));
 
     Bacteria *bacL = new BacterieL(); // Pointeur car classe virtuelle pure.
     Bacteria *bacS = new BacterieS();
 
-    bacL->P_death();
-    bacS->P_death();
+    bacL->dead_or_alive();
+    bacS->dead_or_alive();
 
     bacL->display();
     bacS->display();
