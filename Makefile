@@ -17,5 +17,8 @@ Bacteria.o : Bacteria.cpp Bacteria.h
 Environment.o : Environment.cpp Environment.h Case.h
 	g++ -c -std=c++11 Environment.cpp -o Environment.o
 
-tests.o : tests.cpp Bacteria.h BacterieL.h BacterieS.h Case.h
+tests.o : tests.cpp Bacteria.h BacterieL.h BacterieS.h Case.h Environment.h
 	g++ -c -std=c++11 tests.cpp -o tests.o
+
+clean : simulation
+	rm -rf *.o simulations
