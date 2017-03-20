@@ -45,7 +45,9 @@ Case::Case(int b_genotype, float a_init)
 // ===========================================================================
 Case::~Case()
 {
-    delete bac;
+    if (!amI_Empty()) {
+        delete bac;
+    }
 }
 
 // ===========================================================================
@@ -76,12 +78,21 @@ bool Case::amI_Empty()
 
 void Case::manage_metabolism()
 {
-    if (bac->get_genotype() == 0) //If bacteria L...
+    if (bac->genotype == 0) //If bacteria L...
     {
         bac->metabolism(A_out);
     }
-    else if (bac->get_genotype() == 1) //If bacteria S...
+    else if (bac->genotype == 1) //If bacteria S...
     {
         bac->metabolism(B_out);
+    }
+}
+
+void Case::bac_IsDead() {
+    if (bac->is_alive == false) {
+        A_out += bac->A;
+        B_out += bac->B;
+        C_out += bac->C;
+        bac = nullptr;
     }
 }
