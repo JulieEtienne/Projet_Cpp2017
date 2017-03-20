@@ -13,10 +13,15 @@ using std::endl;
 #include "Case.h"
 #include "Environment.h"
 
+
 int main() {
 
     Bacteria *bacL = new BacterieL(); // Pointeur car classe virtuelle pure.
     Bacteria *bacS = new BacterieS();
+
+    bacL->P_death();
+    bacS->P_death();
+
     bacL->display();
     bacS->display();
 

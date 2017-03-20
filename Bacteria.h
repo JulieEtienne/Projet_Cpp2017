@@ -16,7 +16,7 @@ class Bacteria {
         virtual ~Bacteria();
 
         // ===================================================================
-        //                        Getters
+        //                          Getters
         // ===================================================================
         float get_fitness() const;
         int get_genotype() const;
@@ -45,10 +45,11 @@ class Bacteria {
         static float p_death;
 
         float w; // Bacteria's fitness
-        int genotype; // Bacteria's genotype
+        int genotype; // Bacteria's genotype : 0 or 1
         float A; // Internal concentration of Glucose
         float B; // Internal concentration of Acetate
         float C; // Internal concentration of Ethanol
+        bool is_alive; //True or False
 
 };
 
