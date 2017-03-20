@@ -46,6 +46,7 @@ class Environment {
         // ===================================================================
         int W;
         int H;
+        float a_init;
         Case** grid;
 };
 
