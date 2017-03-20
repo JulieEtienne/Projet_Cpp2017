@@ -11,8 +11,8 @@ using std::endl;
 
 #include "Bacteria.h"
 
-class BacterieL : public Bacteria {
-
+class BacterieL : public Bacteria
+{
     public :
         // ===================================================================
         //                          Constructors
@@ -27,7 +27,7 @@ class BacterieL : public Bacteria {
         // ===================================================================
         //                          Public Methods
         // ===================================================================
-        void metabolism(float& out) override;
+        void metabolism(float &out) override;
         void fitness() override;
 
     protected :
@@ -36,7 +36,6 @@ class BacterieL : public Bacteria {
         // ===================================================================
         float rAA;
         float rAB;
-
 };
 
 #endif // BacterieL_H

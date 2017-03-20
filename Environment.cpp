@@ -1,87 +1,51 @@
 // ===========================================================================
 //                          Includes
 // ===========================================================================
-#include "Case.h"
+
+#include "Environment.h"
 
 
 // ===========================================================================
 //                             Constructors
 // ===========================================================================
-Case::Case()
-{
-    bac = nullptr;
-    A_out = 0;
-    B_out = 0;
-    C_out = 0;
-}
 
-Case::Case(float a_init)
+Environment::Environment()
 {
-    bac = nullptr;
-    A_out = a_init;
-    B_out = 0;
-    C_out = 0;
+    W = 0;
+    H = 0;
 }
-
-Case::Case(int b_genotype, float a_init)
-{
-    if (b_genotype == 0)
-    {
-        bac = new BacterieL();
-    }
-    else if (b_genotype == 1)
-    {
-        bac = new BacterieS();
-    }
-    A_out = a_init;
-    B_out = 0;
-    C_out = 0;
-}
-
 
 
 // ===========================================================================
 //                             Destructor
 // ===========================================================================
-Case::~Case()
-{
-    delete bac;
-}
+Environment::~Environment(){}
 
 // ===========================================================================
 //                              Getters
 // ===========================================================================
-float Case::get_Aout() const
+int Environment::get_W() const
 {
-    return A_out;
+    return W;
 }
 
-float Case::get_Bout() const
+int Environment::get_H() const
 {
-    return B_out;
+    return H;
+}
+// ===========================================================================
+//                              Setters
+// ===========================================================================
+void Environment::set_W(int W_)
+{
+    W = W_;
 }
 
-float Case::get_Cout() const
+void Environment::set_H(int H_)
 {
-    return C_out;
+    H = H_;
 }
 
 // ===========================================================================
 //                             Public Methods
 // ===========================================================================
-bool Case::amI_Empty()
-{
-    return (bac == nullptr);
-}
-
-void Case::manage_metabolism()
-{
-    if (bac->get_genotype() == 0) //If bacteria L...
-    {
-        bac->metabolism(A_out);
-    }
-    else if (bac->get_genotype() == 1) //If bacteria S...
-    {
-        bac->metabolism(B_out);
-    }
-}

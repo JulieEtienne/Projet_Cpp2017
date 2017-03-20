@@ -7,25 +7,24 @@
 // ===========================================================================
 //                             Constructors
 // ===========================================================================
-BacterieL::BacterieL() : Bacteria(1) {
-    cout << "BacterieL's genotype : " << genotype << "\n" << endl;
-}
+BacterieL::BacterieL() : Bacteria(0){}
 
 // ===========================================================================
 //                             Destructor
 // ===========================================================================
-BacterieL::~BacterieL() {
-}
+BacterieL::~BacterieL(){}
 
 // ===========================================================================
 //                             Public Methods
 // ===========================================================================
-void BacterieL::metabolism(float& out) {
+void BacterieL::metabolism(float &out)
+{
     out *= (1 - rAA);
     A = out * rAA + A * (1 - rAB);
-    B = A * rAB + B;
+    B += A * rAB;
 }
 
-void BacterieL::fitness() {
+void BacterieL::fitness()
+{
     w = B;
 }
