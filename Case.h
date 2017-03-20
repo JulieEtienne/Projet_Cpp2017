@@ -8,7 +8,10 @@
 #include "BacterieL.h"
 #include "BacterieS.h"
 
-class Case {
+class Case
+{
+
+    friend class Environment;
 
     public :
         // ===================================================================
