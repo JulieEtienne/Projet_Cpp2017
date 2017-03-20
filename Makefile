@@ -16,3 +16,6 @@ Bacteria.o : Bacteria.cpp Bacteria.h
 
 tests.o : tests.cpp Bacteria.h BacterieL.h BacterieS.h Case.h
 	g++ -c -std=c++11 tests.cpp -o tests.o
+
+clean :
+	-rm *.o
