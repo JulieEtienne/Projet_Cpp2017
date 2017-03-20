@@ -46,30 +46,7 @@ Bacteria::~Bacteria(){}
 // ===========================================================================
 //                              Getters
 // ===========================================================================
-float Bacteria::get_fitness() const
-{
-    return w;
-}
 
-int Bacteria::get_genotype() const
-{
-    return genotype;
-}
-
-float Bacteria::get_A() const
-{
-    return A;
-}
-
-float Bacteria::get_B() const
-{
-    return B;
-}
-
-float Bacteria::get_C() const
-{
-    return C;
-}
 
 // ===========================================================================
 //                          Public Methods
@@ -119,4 +96,3 @@ void Bacteria::display()
         cout << "Unknown bacteria's genotype" << endl;
     }
 }
-
