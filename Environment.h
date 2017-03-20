@@ -18,7 +18,7 @@ class Environment {
         //                          Constructors
         // ===================================================================
         Environment();
-        Environment(int W_, int H_);
+        Environment(int W_, int H_, float a_initial);
 
         // ===================================================================
         //                          Destructor

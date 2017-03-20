@@ -29,7 +29,8 @@ int main() {
 
     int W = 6;
     int H = 6;
-    Environment environment_ = Environment(W, H);
+    float a_init = 0.2;
+    Environment environment_ = Environment(W, H, a_init);
 
     delete bacL;
     delete bacS;
