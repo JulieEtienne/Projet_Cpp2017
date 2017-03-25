@@ -6,6 +6,7 @@
 // ===========================================================================
 #include "Case.h"
 #include <vector>
+#include <algorithm>
 
 using std::vector;
 using std::cout;
@@ -34,7 +35,8 @@ class Environment {
         // ===================================================================
         //                          Public Methods
         // ===================================================================
-        void initialize_grid();
+        void initialize_grid(vector<Case> cells);
+        vector<Case> random_cells();
         void search_gaps();
         void search_BestFitness(int x, int y);
         void fill_gaps();
@@ -47,7 +49,8 @@ class Environment {
         int W;
         int H;
         float a_init;
-        Case** grid;
+        vector<vector<Case>> grid;
+
 };
 
 #endif // CASE_H

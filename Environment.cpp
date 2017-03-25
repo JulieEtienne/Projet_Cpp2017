@@ -19,7 +19,10 @@ Environment::Environment(int W_, int H_, float a_initial)
     W = W_;
     H = H_;
     a_init = a_initial;
-    initialize_grid();
+    grid.resize(W);
+    vector<Case> cells = random_cells();
+    initialize_grid(cells);
+
 }
 
 // ===========================================================================
@@ -27,11 +30,6 @@ Environment::Environment(int W_, int H_, float a_initial)
 // ===========================================================================
 Environment::~Environment()
 {
-    for (int i = 0; i < W; ++i)
-    {
-        delete[] grid[i];
-    }
-    delete[] grid;
 }
 
 // ===========================================================================
@@ -50,13 +48,47 @@ int Environment::get_H() const
 // ===========================================================================
 //                             Public Methods
 // ===========================================================================
-void Environment::initialize_grid()
+void Environment::initialize_grid(vector<Case> cells)
 {
-    grid = new Case*[W];
-    for (int i = 0; i < W; ++i)
-    {
-        grid[i] = new Case[H];
+    for (int i = 0; i < W; ++i) {
+        grid[i].resize(H);
     }
+
+    int k = 0;
+    int i = 0;
+    int j = 0;
+    while (k < (W * H)) {
+        if (k % W == 0 && k != 0) {
+            i = 0; // columns
+            ++j; // rows
+            cout << endl;
+        }
+        grid[i][j] = cells[k];
+        cout << grid[i][j].bac->get_genotype();
+        ++i;
+        ++k;
+    }
+    cout << endl;
+    cout << "La grille a été initialisée." << endl;
+}
+
+vector<Case> Environment::random_cells()
+{
+    int num = W * H;
+    vector<Case> v;
+    v.reserve(num);
+    for (int n = 0; n <= num; ++n) {
+        if (n < num/2) {
+            v.push_back(Case(0, a_init));
+        } else {
+            v.push_back(Case(1, a_init));
+        }
+    }
+    // Shuffles the Case's instances randomly
+    srand(unsigned(time(NULL)));
+    std::random_shuffle(v.begin(), v.end());
+
+    return v;
 }
 
 void Environment::search_gaps()
