@@ -8,6 +8,9 @@
 #include "BacterieL.h"
 #include "BacterieS.h"
 
+using std::cout;
+using std::endl;
+
 class Case
 {
 
