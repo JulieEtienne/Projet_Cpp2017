@@ -3,7 +3,8 @@
 // ===========================================================================
 #include <iostream>
 
-using namespace std;
+using std::cout;
+using std::endl;
 
 #include "Bacteria.h"
 #include <ctime>
@@ -46,7 +47,9 @@ Bacteria::~Bacteria(){}
 // ===========================================================================
 //                              Getters
 // ===========================================================================
-
+int Bacteria::get_genotype(){
+    return genotype;
+}
 
 // ===========================================================================
 //                          Public Methods
@@ -66,7 +69,7 @@ void Bacteria::dead_or_alive()
     for(auto i = 0;  i < 2; i++){ //for i = 0, probability doesn't change significatively
         probability = static_cast <double>(rand()) / static_cast <double> (RAND_MAX);
     }
-    
+
     cout << "Probabilité : " << probability << endl;
 
     if (probability <= p_death)
