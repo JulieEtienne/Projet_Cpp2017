@@ -56,6 +56,7 @@ float Bacteria::get_fitness() const {
 }
 
 float Bacteria::get_A() const {
+    cout << "got A !" << endl;
     return A;
 }
 
@@ -107,6 +108,13 @@ void Bacteria::dead_or_alive()
     {
         is_alive = false;
     }
+}
+
+int Bacteria::mutation()
+{
+    int mutation_ = 0;
+    genotype == 0 ? mutation_ = 1 : mutation_ = 0;
+    return mutation_;
 }
 
 
