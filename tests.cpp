@@ -23,6 +23,9 @@ int main() {
     bacL->dead_or_alive();
     bacS->dead_or_alive();
 
+    bacL->fitness();
+    bacS->fitness();
+
     bacL->display();
     bacS->display();
 

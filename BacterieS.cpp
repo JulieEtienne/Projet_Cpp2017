@@ -23,8 +23,3 @@ void BacterieS::metabolism(float &out)
     B = out * rBB + B * (1 - rBC);
     C += B * rBC;
 }
-
-void BacterieS::fitness() 
-{
-    w = C;
-}
