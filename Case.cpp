@@ -45,9 +45,6 @@ Case::Case(int b_genotype, float a_init)
 // ===========================================================================
 Case::~Case()
 {
-    if (!amI_Empty()) {
-        delete bac;
-    }
 }
 
 // ===========================================================================
@@ -93,6 +90,7 @@ void Case::bac_IsDead() {
         A_out += bac->A;
         B_out += bac->B;
         C_out += bac->C;
+        delete bac;
         bac = nullptr;
     }
 }

@@ -6,7 +6,11 @@
 // ===========================================================================
 #include "Case.h"
 #include <vector>
+#include <algorithm>
 
+using std::vector;
+using std::cout;
+using std::endl;
 
 class Environment {
 
@@ -15,10 +19,13 @@ class Environment {
         //                          Constructors
         // ===================================================================
         Environment();
+        Environment(int W_, int H_, float a_initial);
+
         // ===================================================================
         //                          Destructor
         // ===================================================================
         ~Environment();
+
         // ===================================================================
         //                        Getters
         // ===================================================================
@@ -26,14 +33,14 @@ class Environment {
         int get_H() const;
 
         // ===================================================================
-        //                        Setters
-        // ===================================================================
-        void set_W(int W_);
-        void set_H(int H_);
-
-        // ===================================================================
         //                          Public Methods
         // ===================================================================
+        void initialize_grid(vector<Case> cells);
+        vector<Case> random_cells();
+        void search_gaps();
+        void search_BestFitness(int x, int y);
+        void fill_gaps();
+        void diffusion();
 
     protected :
         // ===================================================================
@@ -41,7 +48,9 @@ class Environment {
         // ===================================================================
         int W;
         int H;
-        std::vector<Case> grid;
+        float a_init;
+        vector<vector<Case>> grid;
+
 };
 
 #endif // CASE_H

@@ -3,7 +3,8 @@
 // ===========================================================================
 #include <iostream>
 
-using namespace std;
+using std::cout;
+using std::endl;
 
 #include "Bacteria.h"
 #include <ctime>
@@ -46,7 +47,9 @@ Bacteria::~Bacteria(){}
 // ===========================================================================
 //                              Getters
 // ===========================================================================
-
+int Bacteria::get_genotype(){
+    return genotype;
+}
 
 // ===========================================================================
 //                          Public Methods
@@ -89,7 +92,7 @@ void Bacteria::mutation()
     double probability;
     for(auto i = 0; i < 2; i++)
     {
-        probability = static_cast <double>(rand()) / static_cast <
+        probability = static_cast <double>(rand()) / static_cast <double> (RAND_MAX);
     }
 }
 
