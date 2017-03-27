@@ -121,9 +121,22 @@ void Bacteria::dead_or_alive()
 
 int Bacteria::mutation()
 {
-    int mutation_ = 0;
-    genotype == 0 ? mutation_ = 1 : mutation_ = 0;
-    return mutation_;
+    double probability;
+    for(auto i = 0; i < 2; i++)
+    {
+        probability = static_cast <double>(rand()) / static_cast <double> (RAND_MAX);
+    }
+    if (probability <= p_mut)
+    {
+        if (genotype == 0)
+        {
+            genotype = 1;
+        }
+        else if (genotype == 1)
+        {
+            genotype = 0;
+        }
+    }
 }
 
 
