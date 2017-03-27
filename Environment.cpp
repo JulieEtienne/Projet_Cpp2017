@@ -141,6 +141,10 @@ void Environment::fill_gaps(int x, int y)
     float new_B = grid[x_mum][y_mum].bac->get_B();
     float new_C = grid[x_mum][y_mum].bac->get_C();
 
+    grid[x_mum][y_mum].bac->mutation();
+
+    int new_genotype = grid[x_mum][y_mum].bac->get_genotype();
+
     new_A = 0 ? 0 : new_A = new_A / 2.0;
     new_B = 0 ? 0 : new_B = new_B / 2.0;
     new_C = 0 ? 0 : new_C = new_C / 2.0;
@@ -149,17 +153,18 @@ void Environment::fill_gaps(int x, int y)
     grid[x_mum][y_mum].bac->set_B(new_B);
     grid[x_mum][y_mum].bac->set_C(new_C);
 
-    int new_genotype = grid[x_mum][y_mum].bac->mutation();
-    if (new_genotype == 0) {
+    if (new_genotype == 0)
+    {
         grid[x][y].bac = new BacterieL();
-    } else {
+    }
+    else if (new_genotype == 1)
+    {
         grid[x][y].bac = new BacterieS();
     }
 
     grid[x][y].bac->set_A(new_A);
     grid[x][y].bac->set_B(new_B);
     grid[x][y].bac->set_C(new_C);
-
 }
 
 void Environment::diffusion(int x, int y)

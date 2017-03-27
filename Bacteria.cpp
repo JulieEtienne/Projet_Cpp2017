@@ -119,7 +119,7 @@ void Bacteria::dead_or_alive()
     }
 }
 
-int Bacteria::mutation()
+void Bacteria::mutation()
 {
     double probability;
     for(auto i = 0; i < 2; i++)
