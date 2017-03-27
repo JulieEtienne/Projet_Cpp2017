@@ -47,8 +47,40 @@ Bacteria::~Bacteria(){}
 // ===========================================================================
 //                              Getters
 // ===========================================================================
-int Bacteria::get_genotype(){
+int Bacteria::get_genotype() const {
     return genotype;
+}
+
+float Bacteria::get_fitness() const {
+    return w;
+}
+
+float Bacteria::get_A() const {
+    cout << "got A !" << endl;
+    return A;
+}
+
+float Bacteria::get_B() const {
+    return B;
+}
+
+float Bacteria::get_C() const {
+    return C;
+}
+
+// ===========================================================================
+//                              Setters
+// ===========================================================================
+void Bacteria::set_A(float a) {
+    A = a;
+}
+
+void Bacteria::set_B(float b) {
+    B = b;
+}
+
+void Bacteria::set_C(float c) {
+    C = c;
 }
 
 // ===========================================================================
@@ -87,13 +119,11 @@ void Bacteria::dead_or_alive()
     }
 }
 
-void Bacteria::mutation()
+int Bacteria::mutation()
 {
-    double probability;
-    for(auto i = 0; i < 2; i++)
-    {
-        probability = static_cast <double>(rand()) / static_cast <double> (RAND_MAX);
-    }
+    int mutation_ = 0;
+    genotype == 0 ? mutation_ = 1 : mutation_ = 0;
+    return mutation_;
 }
 
 

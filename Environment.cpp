@@ -33,19 +33,6 @@ Environment::~Environment()
 }
 
 // ===========================================================================
-//                              Getters
-// ===========================================================================
-int Environment::get_W() const
-{
-    return W;
-}
-
-int Environment::get_H() const
-{
-    return H;
-}
-
-// ===========================================================================
 //                             Public Methods
 // ===========================================================================
 void Environment::initialize_grid(vector<Case> cells)
@@ -91,29 +78,91 @@ vector<Case> Environment::random_cells()
     return v;
 }
 
-void Environment::search_gaps()
+void Environment::search_and_fill_gaps()
 {
     //Parcourir la grille, quand une case est vide,
-    //get ses coordonnées, et appeler fill_gaps
+    //appelle fill_gaps
+    for (int i = 0; i < W; ++i) {
+        for (int j = 0; j < H; ++j) {
+            if (grid[i][j].amI_Empty()) {
+                cout << "Empty" << endl;
+                fill_gaps(i, j);
+            }
+        }
+    }
+    cout << "La case vide a été remplie." << endl;
 }
 
-void Environment::search_BestFitness(int x, int y)
+vector<int> Environment::search_BestFitness(int x, int y)
 {
-    //avec les coordonnées en argument (?),
     //regarder la fitness des cases autour
     //la comparer aux autres et renvoyer les coord de la meilleure
     //si case autour est vide => fitness = 0
+
+    int max_fit = 0;
+    vector<int> best(2);
+    for (int k = x - 1; k <= x + 1; ++k) {
+        for (int m = y - 1; m <= y + 1; ++m) {
+            int fit = 0;
+            int temp_k = k;
+            int temp_m = m;
+
+            k == -1 ? (temp_k = W-1) : 0;
+            k == W ? (temp_k = 0) : 0;
+            m == -1 ? (temp_m = H-1) : 0;
+            m == H ? (temp_m = 0) : 0;
+
+            if (grid[temp_k][temp_m].bac) {
+                fit = grid[temp_k][temp_m].bac->get_fitness();
+            }
+
+            if (fit > max_fit) {
+                max_fit = fit;
+                best[0] = temp_k;
+                best[1] = temp_m;
+            }
+        }
+    }
+    
+    return best;
+
 }
 
-void Environment::fill_gaps()
+void Environment::fill_gaps(int x, int y)
 {
-    //parcourir les cases, si une est empty :
-    //trouver cellule avec meilleure fitness
     //se divise et fille prend la case vide et l'autre prend la place
-    //de la mère
+    //de la mère (ne pas oublier de remplier la case avec une bactérie,
+    // car nullptr)
+    vector<int> coord_best = search_BestFitness(x, y);
+    int x_mum = coord_best[0];
+    int y_mum = coord_best[1];
+
+    float new_A = grid[x_mum][y_mum].bac->get_A();
+    float new_B = grid[x_mum][y_mum].bac->get_B();
+    float new_C = grid[x_mum][y_mum].bac->get_C();
+
+    new_A = 0 ? 0 : new_A = new_A / 2.0;
+    new_B = 0 ? 0 : new_B = new_B / 2.0;
+    new_C = 0 ? 0 : new_C = new_C / 2.0;
+
+    grid[x_mum][y_mum].bac->set_A(new_A);
+    grid[x_mum][y_mum].bac->set_B(new_B);
+    grid[x_mum][y_mum].bac->set_C(new_C);
+
+    int new_genotype = grid[x_mum][y_mum].bac->mutation();
+    if (new_genotype == 0) {
+        grid[x][y].bac = new BacterieL();
+    } else {
+        grid[x][y].bac = new BacterieS();
+    }
+
+    grid[x][y].bac->set_A(new_A);
+    grid[x][y].bac->set_B(new_B);
+    grid[x][y].bac->set_C(new_C);
+
 }
 
-void Environment::diffusion()
+void Environment::diffusion(int x, int y)
 {
     //diffusion des composés (code dans .pdf)
 }

@@ -35,6 +35,7 @@ int main() {
     int H = 6;
     float a_init = 0.2;
     Environment environment_ = Environment(W, H, a_init);
+	environment_.search_and_fill_gaps();
 
     delete bacL;
     delete bacS;

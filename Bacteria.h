@@ -20,7 +20,18 @@ class Bacteria {
         // ===================================================================
         //                          Getters
         // ===================================================================
-        int get_genotype();
+        int get_genotype() const;
+        float get_fitness() const;
+        float get_A() const;
+        float get_B() const;
+        float get_C() const;
+
+        // ===================================================================
+        //                          Setters
+        // ===================================================================
+        void set_A(float a);
+        void set_B(float b);
+        void set_C(float c);
 
         // ===================================================================
         //                          Public Methods
@@ -28,6 +39,7 @@ class Bacteria {
         virtual void metabolism(float &out);
         virtual void fitness();
         virtual void dead_or_alive();
+        virtual int mutation();
 
         // ===================================================================
         //                           Display
