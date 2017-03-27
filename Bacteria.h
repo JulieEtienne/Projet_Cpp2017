@@ -25,6 +25,7 @@ class Bacteria {
         float get_A() const;
         float get_B() const;
         float get_C() const;
+        bool get_is_alive() const;
 
         // ===================================================================
         //                          Setters

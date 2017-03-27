@@ -39,6 +39,7 @@ class Environment {
         vector<int> search_BestFitness(int x, int y);
         void fill_gaps(int x, int y);
         void diffusion(int x, int y);
+        void death_of_cells();
 
     protected :
         // ===================================================================

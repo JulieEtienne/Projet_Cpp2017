@@ -85,8 +85,10 @@ void Case::manage_metabolism()
     }
 }
 
-void Case::bac_IsDead() {
-    if (bac->is_alive == false) {
+void Case::bac_IsDead()
+{
+    if (bac->is_alive == false)
+    {
         A_out += bac->A;
         B_out += bac->B;
         C_out += bac->C;
