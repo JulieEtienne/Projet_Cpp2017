@@ -23,6 +23,9 @@ int main() {
     bacL->dead_or_alive();
     bacS->dead_or_alive();
 
+    bacL->fitness();
+    bacS->fitness();
+
     bacL->display();
     bacS->display();
 
@@ -33,8 +36,8 @@ int main() {
     float a_init = 0.2;
     Environment environment_ = Environment(W, H, a_init);
 	environment_.search_and_fill_gaps();
-	cout << "Search and fill done" << endl;
-	environment_.display();
+
+	environment_.death_of_cells();
 
     delete bacL;
     delete bacS;

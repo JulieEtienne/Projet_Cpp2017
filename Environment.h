@@ -12,7 +12,6 @@
 using std::vector;
 using std::cout;
 using std::endl;
-using std::random_shuffle;
 
 class Environment {
 
@@ -41,7 +40,8 @@ class Environment {
         vector<int> search_BestFitness(int x, int y);
         void fill_gaps(int x, int y);
         void diffusion(int x, int y, float D);
-        void display();
+        void death_of_cells();
+	void display();
 
     protected :
         // ===================================================================

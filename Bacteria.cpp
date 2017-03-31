@@ -62,6 +62,10 @@ float Bacteria::get_C() const {
     return C;
 }
 
+bool Bacteria::get_is_alive() const {
+    return is_alive;
+}
+
 // ===========================================================================
 //                              Setters
 // ===========================================================================
@@ -84,19 +88,28 @@ void Bacteria::metabolism(float &out)
 {
 
 }
+
 void Bacteria::fitness()
 {
-
+    if(genotype == 0)
+    {
+        w = B;
+    }
+    else if(genotype == 1)
+    {
+        w = C;
+    }
 }
 
 void Bacteria::dead_or_alive()
 {
-    double probability;     // probability is a float between 0 and 1 drawn randomly
-    for(auto i = 0;  i < 2; i++){ //for i = 0, probability doesn't change significatively
+    double probability = 0.0;     // probability is a float between 0 and 1 drawn randomly
+    for(auto i = 0;  i < 2; i++)
+    { //for i = 0, probability doesn't change significatively
         probability = static_cast <double>(rand()) / static_cast <double> (RAND_MAX);
     }
-
-    cout << "Probabilité : " << probability << endl;
+    
+    //cout << "Probabilité : " << probability << endl;
 
     if (probability <= p_death)
     {
@@ -104,12 +117,26 @@ void Bacteria::dead_or_alive()
     }
 }
 
-int Bacteria::mutation()
+void Bacteria::mutation()
 {
-    int mutation_ = 0;
-    genotype == 0 ? mutation_ = 1 : mutation_ = 0;
-    return mutation_;
+    double probability = 0.0;
+    for(auto i = 0; i < 2; i++)
+    {
+        probability = static_cast <double>(rand()) / static_cast <double> (RAND_MAX);
+    }
+    if (probability <= p_mut)
+    {
+        if (genotype == 0)
+        {
+            genotype = 1;
+        }
+        else if (genotype == 1)
+        {
+            genotype = 0;
+        }
+    }
 }
+
 
 
 // ===========================================================================
@@ -117,8 +144,9 @@ int Bacteria::mutation()
 // ===========================================================================
 void Bacteria::display()
 {
+    cout << "Bactérie de genotype : " << genotype << endl;
     cout << "Alive ? " << is_alive << endl;
-
+    cout << "Fitness : " << w << endl;
     if (genotype == 0)
     {
         cout << "Bacteria's genotype is L " << endl;

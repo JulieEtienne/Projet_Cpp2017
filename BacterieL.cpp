@@ -7,7 +7,8 @@
 // ===========================================================================
 //                             Constructors
 // ===========================================================================
-BacterieL::BacterieL() : Bacteria(0){}
+BacterieL::BacterieL() : Bacteria(0){
+}
 
 // ===========================================================================
 //                             Destructor
@@ -24,9 +25,4 @@ void BacterieL::metabolism(float &out)
     out *= (1 - rAA);
     A = out * rAA + A * (1 - rAB);
     B += A * rAB;
-}
-
-void BacterieL::fitness()
-{
-    w = B;
 }

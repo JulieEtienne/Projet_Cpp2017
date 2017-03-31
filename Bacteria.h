@@ -26,6 +26,7 @@ class Bacteria {
         float get_A() const;
         float get_B() const;
         float get_C() const;
+        bool get_is_alive() const;
 
         // ===================================================================
         //                          Setters
@@ -41,7 +42,7 @@ class Bacteria {
         virtual void metabolism(float &out);
         virtual void fitness();
         virtual void dead_or_alive();
-        virtual int mutation();
+        virtual void mutation();
 
         // ===================================================================
         //                           Display

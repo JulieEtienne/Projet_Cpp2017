@@ -10,20 +10,23 @@
 // ===========================================================================
 Environment::Environment()
 {
-    W = 0;
-    H = 0;
-    a_init = 0.0;
+    W = 0; // Width = Largeur
+    H = 0; // Height = Hauteur
+    a_init = 0.0; // Initial concentration of glucose
     cout << "La grille est vide.\n" << endl;
 }
 
 Environment::Environment(int W_, int H_, float a_initial)
 {
-    W = W_;
-    H = H_;
-    a_init = a_initial;
+==== BASE ====
+    W = W_; // Width
+    H = H_; // Height
+    a_init = a_initial; // Initial glucose concentration
     srand(time(NULL)); // rand initialization
 
     initialize_grid();
+==== BASE ====
+
 }
 
 // ===========================================================================
@@ -95,7 +98,6 @@ void Environment::search_and_fill_gaps()
             }
         }
     }
-
     cout << "La case vide a été remplie." << endl;
 }
 
@@ -148,25 +150,49 @@ void Environment::fill_gaps(int x, int y)
     float new_B = grid[x_mum][y_mum].bac->get_B();
     float new_C = grid[x_mum][y_mum].bac->get_C();
 
-    new_A = 0 ? 0 : new_A = new_A / 2.0;
-    new_B = 0 ? 0 : new_B = new_B / 2.0;
-    new_C = 0 ? 0 : new_C = new_C / 2.0;
+    grid[x_mum][y_mum].bac->mutation();
+
+    int new_genotype = grid[x_mum][y_mum].bac->get_genotype();
+
+    new_A == 0 ? 0 : new_A = new_A / 2.0;
+    new_B == 0 ? 0 : new_B = new_B / 2.0;
+    new_C == 0 ? 0 : new_C = new_C / 2.0;
 
     grid[x_mum][y_mum].bac->set_A(new_A);
     grid[x_mum][y_mum].bac->set_B(new_B);
     grid[x_mum][y_mum].bac->set_C(new_C);
 
-    int new_genotype = grid[x_mum][y_mum].bac->mutation();
-    if (new_genotype == 0) {
-        grid[x][y].bac = new BacterieL(); //besoin delete ?
-    } else {
-        grid[x][y].bac = new BacterieS();
+    if (new_genotype == 0)
+    {
+        grid[x][y].bac = new BacterieL();
     }
+    else if (new_genotype == 1)
+    {
+        grid[x][y].bac = new BacterieS();
+    } else {
+	cout << "Wrong genotype." << endl;
+	}
 
     grid[x][y].bac->set_A(new_A);
     grid[x][y].bac->set_B(new_B);
     grid[x][y].bac->set_C(new_C);
+}
 
+void Environment::death_of_cells()
+{
+    for (int i = 0; i < W; ++i)
+    {
+        for (int j = 0; j < H; ++j)
+        {
+            grid[i][j].bac->dead_or_alive();
+            if (grid[i][j].bac->get_is_alive() == false)
+            {
+                grid[i][j].bac_IsDead();
+                cout << "La bactérie est bien morte" << endl;
+                diffusion(i, j);
+            }
+        }
+    }
 }
 
 void Environment::diffusion(int x, int y, float D)
@@ -186,8 +212,6 @@ void Environment::diffusion(int x, int y, float D)
             m == H ? (temp_m = 0) : 0;
 
             a_next = a_next + D * ;**/
-
-        //cf code .pdf
 }
 
 // Display grid and check if a Case if empty
