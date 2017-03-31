@@ -31,8 +31,8 @@ Bacteria::Bacteria()
 
 Bacteria::Bacteria(int genotype_)
 {
-    w = 0;
     genotype = genotype_;
+    w = fitness();
     A = 0;
     B = 0;
     C = 0;
@@ -89,7 +89,7 @@ void Bacteria::metabolism(float &out)
 
 }
 
-void Bacteria::fitness()
+double Bacteria::fitness()
 {
     if(genotype == 0)
     {
@@ -99,6 +99,8 @@ void Bacteria::fitness()
     {
         w = C;
     }
+    w < w_min ? w = 0 : 0; // If w is too low, the fitness is zero !
+    return w;
 }
 
 void Bacteria::dead_or_alive()

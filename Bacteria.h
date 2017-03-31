@@ -39,7 +39,7 @@ class Bacteria {
         // ===================================================================
 
         virtual void metabolism(float &out);
-        virtual void fitness();
+        virtual double fitness();
         virtual void dead_or_alive();
         virtual void mutation();
 
