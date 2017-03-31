@@ -34,7 +34,8 @@ int main() {
     int W = 6;
     int H = 6;
     float a_init = 0.2;
-    Environment environment_ = Environment(W, H, a_init);
+	float D = 0.1;
+    Environment environment_ = Environment(W, H, a_init, D);
 	environment_.search_and_fill_gaps();
 
 	environment_.death_of_cells();

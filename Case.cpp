@@ -121,5 +121,7 @@ void Case::bac_IsDead()
         C_out += bac->C;
         delete bac;
         bac = NULL;
+    } else {
+        cout << "Bacteria is alive, can't apply bac_IsDead()..." << endl;
     }
 }

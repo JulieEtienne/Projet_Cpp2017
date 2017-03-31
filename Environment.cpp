@@ -16,25 +16,21 @@ Environment::Environment()
     cout << "La grille est vide.\n" << endl;
 }
 
-Environment::Environment(int W_, int H_, float a_initial)
+Environment::Environment(int W_, int H_, float a_initial, float diff_coeff)
 {
-==== BASE ====
-    W = W_; // Width
-    H = H_; // Height
-    a_init = a_initial; // Initial glucose concentration
+    W = W_;
+    H = H_;
+    a_init = a_initial;
+    D = diff_coeff;
     srand(time(NULL)); // rand initialization
 
     initialize_grid();
-==== BASE ====
-
 }
 
 // ===========================================================================
 //                             Destructor
 // ===========================================================================
-Environment::~Environment()
-{
-}
+Environment::~Environment() {}
 
 // ===========================================================================
 //                             Public Methods
@@ -195,7 +191,7 @@ void Environment::death_of_cells()
     }
 }
 
-void Environment::diffusion(int x, int y, float D)
+void Environment::diffusion(int x, int y)
 {
     //Diffusion des composés
     /**float a_next = grid[x][y].bac->get_A();

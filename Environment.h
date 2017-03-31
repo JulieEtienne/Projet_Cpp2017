@@ -20,7 +20,7 @@ class Environment {
         //                          Constructors
         // ===================================================================
         Environment();
-        Environment(int W_, int H_, float a_initial);
+        Environment(int W_, int H_, float a_initial, float diff_coeff);
 
         // ===================================================================
         //                          Destructor
@@ -39,7 +39,7 @@ class Environment {
         void search_and_fill_gaps();
         vector<int> search_BestFitness(int x, int y);
         void fill_gaps(int x, int y);
-        void diffusion(int x, int y, float D);
+        void diffusion(int x, int y);
         void death_of_cells();
 	void display();
 
@@ -47,9 +47,10 @@ class Environment {
         // ===================================================================
         //                          Attributes
         // ===================================================================
-        int W;
-        int H;
-        float a_init;
+        int W; // Width of the grid
+        int H; // Height
+        float a_init; // Initial glucose concentration
+        float D; // Diffusion constant
         vector<vector<Case>> grid;
 
 };

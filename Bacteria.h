@@ -10,7 +10,6 @@ class Bacteria {
         //                          Constructors
         // ===================================================================
         Bacteria(); // Default constructor
-        //Bacteria(const Bacteria &b); // Copy constructor
         Bacteria(int genotype_);
 
         // ===================================================================
@@ -38,7 +37,7 @@ class Bacteria {
         // ===================================================================
         //                          Public Methods
         // ===================================================================
-        //virtual Bacteria* clone () = 0;
+
         virtual void metabolism(float &out);
         virtual void fitness();
         virtual void dead_or_alive();
