@@ -8,18 +8,18 @@
 // ===========================================================================
 Environment::Environment()
 {
-    W = 0;
-    H = 0;
-    a_init = 0.0;
+    W = 0; // Width = Largeur
+    H = 0; // Height = Hauteur
+    a_init = 0.0; // Initial concentration of glucose
     cout << "La grille est vide.\n" << endl;
 }
 
 Environment::Environment(int W_, int H_, float a_initial)
 {
-    W = W_;
-    H = H_;
-    a_init = a_initial;
-    grid.resize(W);
+    W = W_; // Width
+    H = H_; // Height
+    a_init = a_initial; // Initial concentration of glucose
+    grid.resize(W); // Create a first grid
     vector<Case> cells = random_cells();
     initialize_grid(cells);
 
@@ -145,9 +145,9 @@ void Environment::fill_gaps(int x, int y)
 
     int new_genotype = grid[x_mum][y_mum].bac->get_genotype();
 
-    new_A = 0 ? 0 : new_A = new_A / 2.0;
-    new_B = 0 ? 0 : new_B = new_B / 2.0;
-    new_C = 0 ? 0 : new_C = new_C / 2.0;
+    new_A == 0 ? 0 : new_A = new_A / 2.0;
+    new_B == 0 ? 0 : new_B = new_B / 2.0;
+    new_C == 0 ? 0 : new_C = new_C / 2.0;
 
     grid[x_mum][y_mum].bac->set_A(new_A);
     grid[x_mum][y_mum].bac->set_B(new_B);
@@ -187,4 +187,5 @@ void Environment::death_of_cells()
 void Environment::diffusion(int x, int y)
 {
     //diffusion des composés (code dans .pdf)
+
 }
