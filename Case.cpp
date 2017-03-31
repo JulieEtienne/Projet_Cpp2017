@@ -2,6 +2,7 @@
 //                          Includes
 // ===========================================================================
 #include "Case.h"
+#include <cassert>
 
 
 // ===========================================================================
@@ -9,15 +10,27 @@
 // ===========================================================================
 Case::Case()
 {
-    bac = nullptr;
+    bac = NULL;
     A_out = 0;
     B_out = 0;
     C_out = 0;
 }
 
+/*Case::Case(const Case &obj) {
+    if (obj.bac != NULL) {
+        bac = obj.bac->clone();
+    } else {
+        bac = NULL;
+    }
+
+    A_out = obj.A_out;
+    B_out = obj.B_out;
+    C_out = obj.C_out;
+}*/
+
 Case::Case(float a_init)
 {
-    bac = nullptr;
+    bac = NULL;
     A_out = a_init;
     B_out = 0;
     C_out = 0;
@@ -33,6 +46,10 @@ Case::Case(int b_genotype, float a_init)
     {
         bac = new BacterieS();
     }
+    else
+    {
+        bac = NULL;
+    }
     A_out = a_init;
     B_out = 0;
     C_out = 0;
@@ -45,6 +62,16 @@ Case::Case(int b_genotype, float a_init)
 // ===========================================================================
 Case::~Case()
 {
+    //If the lines below are being used, seg fault appears at the very end
+    //of our program,
+    //and the grid doesn't print well (but it does in valgrind)
+
+    /*cout << "Case destructor called" << endl;
+    if (bac != NULL) {
+        delete bac;
+    } else {
+        cout << "Was empty" << endl;
+    }*/
 }
 
 // ===========================================================================
@@ -70,7 +97,7 @@ float Case::get_Cout() const
 // ===========================================================================
 bool Case::amI_Empty()
 {
-    return (bac == nullptr);
+    return (bac == NULL);
 }
 
 void Case::manage_metabolism()
@@ -91,6 +118,6 @@ void Case::bac_IsDead() {
         B_out += bac->B;
         C_out += bac->C;
         delete bac;
-        bac = nullptr;
+        bac = NULL;
     }
 }

@@ -2,6 +2,8 @@
 //                          Includes
 // ===========================================================================
 #include "Environment.h"
+#include <iostream>
+#include <cassert>
 
 // ===========================================================================
 //                             Constructors
@@ -19,10 +21,9 @@ Environment::Environment(int W_, int H_, float a_initial)
     W = W_;
     H = H_;
     a_init = a_initial;
-    grid.resize(W);
-    vector<Case> cells = random_cells();
-    initialize_grid(cells);
+    srand(time(NULL)); // rand initialization
 
+    initialize_grid();
 }
 
 // ===========================================================================
@@ -35,47 +36,51 @@ Environment::~Environment()
 // ===========================================================================
 //                             Public Methods
 // ===========================================================================
-void Environment::initialize_grid(vector<Case> cells)
+
+void Environment::initialize_grid()
 {
+    // Resizes width of grid : will call Case's default constructor
+    grid.resize(W);
     for (int i = 0; i < W; ++i) {
         grid[i].resize(H);
     }
 
-    int k = 0;
-    int i = 0;
-    int j = 0;
-    while (k < (W * H)) {
-        if (k % W == 0 && k != 0) {
-            i = 0; // columns
-            ++j; // rows
-            cout << endl;
-        }
-        grid[i][j] = cells[k];
-        cout << grid[i][j].bac->get_genotype();
-        ++i;
-        ++k;
-    }
-    cout << endl;
-    cout << "La grille a été initialisée." << endl;
-}
+    //Filling it randomly with same amount of bacteria L and S
+    int num = (W * H) / 2; // Total number of Case in grid divided by 2
+    int zero = 0; // Counts the number of bacterieL
+    int one = 0; // Counts the number of bacterieS
+    double p = 0; // Probability to be a bacterieL or bacterieS
 
-vector<Case> Environment::random_cells()
-{
-    int num = W * H;
-    vector<Case> v;
-    v.reserve(num);
-    for (int n = 0; n <= num; ++n) {
-        if (n < num/2) {
-            v.push_back(Case(0, a_init));
-        } else {
-            v.push_back(Case(1, a_init));
+    // Filling the grid
+    for (int i = 0; i < W; ++i) {
+        for (int j = 0; j < H; ++j) {
+            p = rand()%101; // Random number within [0, 100]
+            int a = 0; // To simplify our if...else... content
+
+            // If p < 50, or if there are too many bacterieS, fill with an L
+            // otherwise, if p > 50, or if there are too many L, fill with an S
+            if ((p < 50 && zero < num) || (p >= 50 && one >= num)) {
+                a = 1;
+            } else if ((p >= 50 && one < num) || (p < 50 && zero >= num)) {
+                a = 2;
+            }
+
+            //Filling
+            if (a == 1) {
+                grid[i][j] = Case(0, a_init);
+                zero++;
+            } else if (a == 2) {
+                grid[i][j] = Case(1, a_init);
+                one++;
+            } else {
+                cout << "Too many cells, not enough space." << endl;
+            }
         }
     }
-    // Shuffles the Case's instances randomly
-    srand(unsigned(time(NULL)));
-    std::random_shuffle(v.begin(), v.end());
+    // Check total number of bacteria created
+    cout << "Nb 0 : " << zero << " Nb 1 : "<< one << endl;
 
-    return v;
+    cout << "Grille initialisée." << endl;
 }
 
 void Environment::search_and_fill_gaps()
@@ -90,6 +95,7 @@ void Environment::search_and_fill_gaps()
             }
         }
     }
+
     cout << "La case vide a été remplie." << endl;
 }
 
@@ -100,13 +106,14 @@ vector<int> Environment::search_BestFitness(int x, int y)
     //si case autour est vide => fitness = 0
 
     int max_fit = 0;
-    vector<int> best(2);
+    vector<int> best(2); // Will receive the coord of the best bacteria
     for (int k = x - 1; k <= x + 1; ++k) {
         for (int m = y - 1; m <= y + 1; ++m) {
             int fit = 0;
             int temp_k = k;
             int temp_m = m;
 
+            // Check conditions of toroidal grid
             k == -1 ? (temp_k = W-1) : 0;
             k == W ? (temp_k = 0) : 0;
             m == -1 ? (temp_m = H-1) : 0;
@@ -123,7 +130,7 @@ vector<int> Environment::search_BestFitness(int x, int y)
             }
         }
     }
-    
+
     return best;
 
 }
@@ -151,7 +158,7 @@ void Environment::fill_gaps(int x, int y)
 
     int new_genotype = grid[x_mum][y_mum].bac->mutation();
     if (new_genotype == 0) {
-        grid[x][y].bac = new BacterieL();
+        grid[x][y].bac = new BacterieL(); //besoin delete ?
     } else {
         grid[x][y].bac = new BacterieS();
     }
@@ -162,7 +169,35 @@ void Environment::fill_gaps(int x, int y)
 
 }
 
-void Environment::diffusion(int x, int y)
+void Environment::diffusion(int x, int y, float D)
 {
-    //diffusion des composés (code dans .pdf)
+    //Diffusion des composés
+    /**float a_next = grid[x][y].bac->get_A();
+    float b_next = grid[x][y].bac->get_B();
+    float c_next = grid[x][y].bac->get_C();
+    for (int i = -1; i <= 1; ++i) {
+        for (int j = - 1; j <= 1; ++j) {
+            int k = x + i;
+            int m = y + i;
+
+            k == -1 ? (temp_k = W-1) : 0;
+            k == W ? (temp_k = 0) : 0;
+            m == -1 ? (temp_m = H-1) : 0;
+            m == H ? (temp_m = 0) : 0;
+
+            a_next = a_next + D * ;**/
+
+        //cf code .pdf
+}
+
+// Display grid and check if a Case if empty
+void Environment::display()
+{
+    for (int i = 0; i < W; ++i) {
+        for (int j = 0; j < H; ++j) {
+            if(grid[i][j].amI_Empty()) cout << "Empty Case" << endl;
+            cout << grid[i][j].bac->get_genotype();
+        }
+        cout << endl;
+    }
 }
