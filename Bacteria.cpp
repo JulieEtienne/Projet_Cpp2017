@@ -109,7 +109,7 @@ void Bacteria::fitness()
 
 void Bacteria::dead_or_alive()
 {
-    double probability;     // probability is a float between 0 and 1 drawn randomly
+    double probability = 0.0;     // probability is a float between 0 and 1 drawn randomly
     for(auto i = 0;  i < 2; i++)
     { //for i = 0, probability doesn't change significatively
         probability = static_cast <double>(rand()) / static_cast <double> (RAND_MAX);
@@ -125,7 +125,7 @@ void Bacteria::dead_or_alive()
 
 void Bacteria::mutation()
 {
-    double probability;
+    double probability = 0.0;
     for(auto i = 0; i < 2; i++)
     {
         probability = static_cast <double>(rand()) / static_cast <double> (RAND_MAX);
