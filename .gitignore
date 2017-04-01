@@ -1,3 +1,6 @@
 simulation
 *.pdf
 *.o
+*.odg
+vgcore*
+Options
