@@ -42,7 +42,7 @@ class Environment {
         void search_and_fill_gaps();
         vector<int> search_BestFitness(int x, int y);
         void fill_gaps(int x, int y);
-        void diffusion(int x, int y);
+        void diffusion();
         void death_of_cells();
 	void display();
 

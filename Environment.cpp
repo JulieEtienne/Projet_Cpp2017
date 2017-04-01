@@ -199,34 +199,61 @@ void Environment::death_of_cells()
             {
                 grid[i][j].bac_IsDead();
                 cout << "La bactérie est bien morte" << endl;
-                diffusion(i, j);
+                //diffusion(i, j);
             }
         }
     }
 }
 
-void Environment::diffusion(int x, int y)
+// Diffuse metabolites (applied to all cells at the same time)
+void Environment::diffusion()
 {
-    //Diffusion des composés
-    /**float a_next = grid[x][y].bac->get_A();
-    float b_next = grid[x][y].bac->get_B();
-    float c_next = grid[x][y].bac->get_C();
-    for (int i = -1; i <= 1; ++i) {
-        for (int j = - 1; j <= 1; ++j) {
-            int k = x + i;
-            int m = y + i;
+    // Copy initial grid : "copy" will keep the concentration at time t
+    // Grid will store them at (t + 1)
+    vector<vector<Case>> copy = grid;
+    int temp_m = 0;
+    int temp_k = 0;
 
-            k == -1 ? (temp_k = W-1) : 0;
-            k == W ? (temp_k = 0) : 0;
-            m == -1 ? (temp_m = H-1) : 0;
-            m == H ? (temp_m = 0) : 0;
+    // Parcourir toutes les cases
+    for (int x = 0; x < W; ++x) {
+        for (int y = 0; y < H; ++y) {
+        // Autour de la case :
+            for (int i = -1; i <= 1; ++i) {
+                for (int j = - 1; j <= 1; ++j) {
 
-            a_next = a_next + D * ;**/
+                    int k = x + i;
+                    int m = y + i;
+
+                    //Conditions aux bords
+                    k == -1 ? (temp_k = W-1) : 0;
+                    k == W ? (temp_k = 0) : 0;
+                    m == -1 ? (temp_m = H-1) : 0;
+                    m == H ? (temp_m = 0) : 0;
+
+                    copy[x][y].A_out += D * copy[x][y].A_out;
+                    copy[x][y].B_out += D * copy[x][y].B_out;
+                    copy[x][y].C_out += D * copy[x][y].C_out;
+
+                }
+            }
+
+            // End computations and update in grid :
+            grid[x][y].A_out = copy[x][y].A_out - 9 * D * copy[x][y].A_out;
+            grid[x][y].B_out = copy[x][y].B_out - 9 * D * copy[x][y].B_out;
+            grid[x][y].C_out = copy[x][y].C_out - 9 * D * copy[x][y].C_out;
+
+        }
+    }
+    display();
+    cout << "La diffusion est terminée." << endl;
+
 }
+
 
 // Display grid and check if a Case if empty
 void Environment::display()
 {
+    cout << "Genotypes : " << endl;
     for (int i = 0; i < W; ++i) {
         for (int j = 0; j < H; ++j) {
             if(grid[i][j].amI_Empty()) cout << "Empty Case" << endl;
@@ -234,4 +261,14 @@ void Environment::display()
         }
         cout << endl;
     }
+
+    cout << "A concentration : " << endl;
+    for (int i = 0; i < W; ++i) {
+        for (int j = 0; j < H; ++j) {
+            cout << grid[i][j].A_out;
+        }
+        cout << endl;
+    }
+
+    // SEG FAULT DE TEMPS EN TEMPS, IL DIT QU'UNE CASE EST EMPTY
 }
