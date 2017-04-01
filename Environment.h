@@ -8,10 +8,13 @@
 #include <vector>
 #include <algorithm>
 #include <time.h>
+#include <utility>
 
 using std::vector;
 using std::cout;
 using std::endl;
+using std::pair;
+using std::make_pair;
 
 class Environment {
 

@@ -84,17 +84,31 @@ void Environment::initialize_grid()
 
 void Environment::search_and_fill_gaps()
 {
-    //Parcourir la grille, quand une case est vide,
-    //appelle fill_gaps
+    //Parcourir la grille, quand une case est vide, garder ses coord dans un
+    //vecteur, mélanger ce vecteur et puis appeler fill_gaps pour chaque case
+    vector<pair <int, int>> coords; // Will store the coords of empty Case
+    // Search for empty Case
     for (int i = 0; i < W; ++i) {
         for (int j = 0; j < H; ++j) {
             if (grid[i][j].amI_Empty()) {
-                cout << "Empty" << endl;
-                fill_gaps(i, j);
+                coords.push_back(make_pair(i, j)); // Add the coords to the vector
             }
         }
     }
-    cout << "La case vide a été remplie." << endl;
+
+    int r = 0; // will store a random number
+    int x = 0; // Will store the x coord of the empty Case
+    int y = 0; // Will store the y coord of the empty Case
+    unsigned int size_initial = coords.size(); // Initial number of coords
+    for (int n = 0; n < size_initial; n++) {
+        // Random number within [0,coords.size())
+        r = rand()%(coords.size());
+        x = coords[r].first;
+        y = coords[r].second;
+        fill_gaps(x, y);
+        coords.erase(coords.begin() + r); // Deletes the coords of the Case that just got filled
+    }
+    cout << "Toutes les cases vides ont été remplies." << endl;
 }
 
 vector<int> Environment::search_BestFitness(int x, int y)
