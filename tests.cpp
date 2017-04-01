@@ -39,7 +39,8 @@ int main() {
 	environment_.search_and_fill_gaps();
 
 	environment_.death_of_cells();
-
+	environment_.diffusion();
+	
     delete bacL;
     delete bacS;
 
