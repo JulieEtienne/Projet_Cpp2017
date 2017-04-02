@@ -120,3 +120,17 @@ COPY CONSTRUCTOR
     is_alive = b.is_alive;
 }*/
 
+
+/*Case::Case(const Case &obj) {
+    if (obj.bac != NULL) {
+        bac = obj.bac->clone();
+    } else {
+        bac = NULL;
+    }
+
+    A_out = obj.A_out;
+    B_out = obj.B_out;
+    C_out = obj.C_out;
+}*/
+
+
