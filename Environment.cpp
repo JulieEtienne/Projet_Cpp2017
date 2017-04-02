@@ -22,8 +22,6 @@ Environment::Environment(int W_, int H_, float a_initial, float diff_coeff)
     H = H_;
     a_init = a_initial;
     D = diff_coeff;
-    srand(time(NULL)); // rand initialization
-
     initialize_grid();
 }
 
@@ -53,7 +51,7 @@ void Environment::initialize_grid()
     // Filling the grid
     for (int i = 0; i < W; ++i) {
         for (int j = 0; j < H; ++j) {
-            p = rand()%101; // Random number within [0, 100]
+            p = static_cast <double>(rand()) * 100 / static_cast <double> (RAND_MAX); // Random number within [0, 100]
             int a = 0; // To simplify our if...else... content
 
             // If p < 50, or if there are too many bacterieS, fill with an L
@@ -208,6 +206,7 @@ void Environment::diffusion(int x, int y)
             m == H ? (temp_m = 0) : 0;
 
             a_next = a_next + D * ;**/
+
 }
 
 // Display grid and check if a Case if empty
