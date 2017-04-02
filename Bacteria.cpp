@@ -14,7 +14,7 @@ using std::endl;
 // ===========================================================================
 float Bacteria::w_min = 0.001;
 float Bacteria::p_mut = 0;
-float Bacteria::p_death = 0.02;
+float Bacteria::p_death = 0.8;
 
 // ===========================================================================
 //                             Constructors
@@ -131,7 +131,7 @@ void Bacteria::mutation()
 {
     double p = 0.0;
 
-    for(auto i = 0; i < 2; i++)
+    for(auto i = 0; i < 2; i++) // To have a better random number
     {
         p = static_cast <double>(rand()) / static_cast <double> (RAND_MAX);
     }

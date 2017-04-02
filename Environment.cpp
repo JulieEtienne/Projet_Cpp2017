@@ -112,6 +112,7 @@ void Environment::search_and_fill_gaps()
             {
                 // Adds its coordinates to the vector
                 coords.push_back(make_pair(i, j));
+                cout << "JUSQUE LÀ ÇA MARCHE !" << i << j << endl;
             }
         }
     }
@@ -198,19 +199,6 @@ void Environment::fill_gaps(int x, int y)
     float new_A = grid[x_mum][y_mum].bac->get_A();
     float new_B = grid[x_mum][y_mum].bac->get_B();
     float new_C = grid[x_mum][y_mum].bac->get_C();
-
-    // The "Mum" is going to divide herself into 2 daughter cells :
-    // First, check we have concentrations != 0
-    new_A == 0 ? 0 : new_A = new_A / 2.0;
-    new_B == 0 ? 0 : new_B = new_B / 2.0;
-    new_C == 0 ? 0 : new_C = new_C / 2.0;
-    // Set the new concentrations in the bacteria "Mum"
-    grid[x_mum][y_mum].bac->set_A(new_A);
-    grid[x_mum][y_mum].bac->set_B(new_B);
-    grid[x_mum][y_mum].bac->set_C(new_C);
-    // Is the "Mum" going to go through a mutation ?
-    grid[x_mum][y_mum].bac->mutation();
-    // Store the new genotype
     int new_genotype = grid[x_mum][y_mum].bac->get_genotype();
 
     // Fill the empty case by creating a bacteria L or S,
@@ -225,12 +213,38 @@ void Environment::fill_gaps(int x, int y)
     }
     else
     {
-	cout << "Wrong genotype." << endl;
-	}
+    cout << "Wrong genotype." << endl;
+    }
+
+    // The "Mum" is going to divide herself into 2 daughter cells :
+    // First, check we have concentrations != 0
+    new_A == 0 ? 0 : new_A = new_A / 2.0;
+    new_B == 0 ? 0 : new_B = new_B / 2.0;
+    new_C == 0 ? 0 : new_C = new_C / 2.0;
+    // Set the new concentrations in the bacteria "Mum"
+    grid[x_mum][y_mum].bac->set_A(new_A);
+    grid[x_mum][y_mum].bac->set_B(new_B);
+    grid[x_mum][y_mum].bac->set_C(new_C);
+
+    if (choose_Mum_or_baby_to_mutate() == 1)
+    {
+        grid[x][y].bac->mutation();
+    }
+    else if (choose_Mum_or_baby_to_mutate() == 0)
+    {
+        grid[x_mum][y_mum].bac->mutation();
+    }
+
     //Set the concentration inside the new bacteria
     grid[x][y].bac->set_A(new_A);
     grid[x][y].bac->set_B(new_B);
     grid[x][y].bac->set_C(new_C);
+}
+
+int Environment::choose_Mum_or_baby_to_mutate()
+{
+    int p = rand()%2;
+    return(p);
 }
 
 // Diffuse metabolites (diffusion is applied to all cells at the same time)
@@ -345,23 +359,23 @@ void Environment::display()
         cout << endl;
     }
 
-    cout << "B concentration : " << endl;
-    for (int i = 0; i < W; ++i)
-    {
-        for (int j = 0; j < H; ++j)
-        {
-            cout << grid[i][j].B_out << "\t";
-        }
-        cout << endl;
-    }
+    // cout << "B concentration : " << endl;
+    // for (int i = 0; i < W; ++i)
+    // {
+    //     for (int j = 0; j < H; ++j)
+    //     {
+    //         cout << grid[i][j].B_out << "\t";
+    //     }
+    //     cout << endl;
+    // }
 
-    cout << "C concentration : " << endl;
-    for (int i = 0; i < W; ++i)
-    {
-        for (int j = 0; j < H; ++j)
-        {
-            cout << grid[i][j].C_out << "\t";
-        }
-        cout << endl;
-    }
+    // cout << "C concentration : " << endl;
+    // for (int i = 0; i < W; ++i)
+    // {
+    //     for (int j = 0; j < H; ++j)
+    //     {
+    //         cout << grid[i][j].C_out << "\t";
+    //     }
+    //     cout << endl;
+    // }
 }

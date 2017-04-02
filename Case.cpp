@@ -64,8 +64,8 @@ Case::~Case()
 // ===========================================================================
 bool Case::amI_Empty()
 {
-    // The Case is empty is the pointer to a bacteria is a null pointer
-    return (bac == NULL);
+    // The Case is empty if the pointer to a bacteria is a null pointer
+    return (bac == NULL); // return 0 if False and 1 if True
 }
 
 // Depending on the type of bacteria, calls a metabolism or the other
@@ -83,17 +83,10 @@ void Case::manage_metabolism()
 
 void Case::bac_IsDead()
 {
-    if (bac->is_alive == false)
-    {
-        // When bac dies, it releases its metabolites into the Case it was in
-        A_out += bac->A;
-        B_out += bac->B;
-        C_out += bac->C;
-        delete bac;
-        bac = NULL;
-    }
-    else
-    {
-        cout << "Bacteria is alive, can't apply bac_IsDead()..." << endl;
-    }
+    // When bac dies, it releases its metabolites into the Case it was in
+    A_out += bac->A;
+    B_out += bac->B;
+    C_out += bac->C;
+    delete bac;
+    bac = NULL;
 }

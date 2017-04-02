@@ -6,6 +6,7 @@
 
 using std::cout;
 using std::endl;
+using std::pair;
 
 #include "Bacteria.h"
 #include "BacterieL.h"

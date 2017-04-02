@@ -50,6 +50,7 @@ class Environment
         // the coordinates of the best-fit bacteria are given as parameters
         void fill_gaps(int x, int y);
         // Manages the diffusion of the 3 metabolites around the grid
+        int choose_Mum_or_baby_to_mutate();
         void diffusion();
         // Check if a bacteria is dead, and deals with it if it is the case
         void death_of_cells();
