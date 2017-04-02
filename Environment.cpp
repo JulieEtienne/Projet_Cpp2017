@@ -240,6 +240,7 @@ void Environment::diffusion()
     // Grid will store them at (t + 1)
     vector<vector<Case>> copy = grid;
     // m and k are needed to check the toroidal conditions
+
     int m = 0;
     int k = 0;
 
@@ -262,21 +263,20 @@ void Environment::diffusion()
                     m == -1 ? (m = H-1) : 0;
                     m == H ? (m = 0) : 0;
 
-                    copy[x][y].A_out += D * copy[x][y].A_out;
-                    copy[x][y].B_out += D * copy[x][y].B_out;
-                    copy[x][y].C_out += D * copy[x][y].C_out;
+                    copy[x][y].A_out += D * grid[x][y].A_out;
+                    copy[x][y].B_out += D * grid[x][y].B_out;
+                    copy[x][y].C_out += D * grid[x][y].C_out;
                 }
             }
             // End computations and update in grid :
-            grid[x][y].A_out = copy[x][y].A_out - 9 * D * copy[x][y].A_out;
-            grid[x][y].B_out = copy[x][y].B_out - 9 * D * copy[x][y].B_out;
-            grid[x][y].C_out = copy[x][y].C_out - 9 * D * copy[x][y].C_out;
-
+            grid[x][y].A_out = copy[x][y].A_out - 9 * D * grid[x][y].A_out;
+            grid[x][y].B_out = copy[x][y].B_out - 9 * D * grid[x][y].B_out;
+            grid[x][y].C_out = copy[x][y].C_out - 9 * D * grid[x][y].C_out;
         }
     }
+
     display();
     cout << "La diffusion est terminée." << endl;
-
 }
 
 void Environment::death_of_cells()
