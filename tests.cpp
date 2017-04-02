@@ -38,7 +38,9 @@ int main() {
     Environment environment_ = Environment(W, H, a_init, D);
 	environment_.search_and_fill_gaps();
 
-	environment_.death_of_cells();
+	//environment_.death_of_cells();
+	environment_.diffusion();
+	environment_.clean_envir();
 
     delete bacL;
     delete bacS;

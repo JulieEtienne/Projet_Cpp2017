@@ -1,0 +1,122 @@
+    for(auto& c: cells)
+    {
+        if(c.bac)
+            std::cout << c.bac->get_genotype();
+        else
+            std::cout << 'X';
+    }
+    std::cout << std::endl;
+
+
+
+    // Shuffles the Case's instances randomly
+    srand(unsigned(time(NULL)));
+    //assert(not (cells.begin()+1)->amI_Empty());
+    std::random_shuffle(cells.begin(), cells.end());
+
+
+    for(auto& c: cells)
+    {
+        if(c.bac)
+            std::cout << c.bac->get_genotype();
+        else
+            std::cout << 'X';
+    }
+    std::cout << std::endl;
+
+    int k = 0;
+    int i = 0;
+    int j = 0;
+    while (k < (W * H)) {
+        if (k % W == 0 && k != 0) {
+            i = 0; // columns
+            ++j; // rows
+            cout << endl;
+        }
+        //assert(not cells.at(k).amI_Empty());
+        grid[i][j] = cells[k];
+        cout << grid[i][j].bac->get_genotype();
+        i++;
+        k++;
+    }
+    cout << endl;
+    cout << "La grille a été initialisée." << endl;
+
+
+
+/*vector<Case> Environment::random_cells()
+{
+    int num = W * H;
+    vector<Case> v;
+    v.reserve(num);
+    for (int n = 0; n < num; ++n) {
+        if (n < num/2) {
+            v.push_back(Case(0, a_init));
+        } else {
+            v.push_back(Case(1, a_init));
+        }
+    }
+    // Shuffles the Case's instances randomly
+    srand(unsigned(time(NULL)));
+    assert(not (v.begin()+1)->amI_Empty());
+    std::random_shuffle(v.begin(), v.end());
+
+    return v;
+}*/
+
+
+
+
+
+    //vector<Case> cells;
+    //cells.reserve(num);
+
+    /*for (int n = 0; n < num; ++n) {
+        if (n < num/2) {
+            cells.push_back(Case(0, a_init));
+            cout << cells[n].bac->get_genotype();
+        } else {
+            cells.push_back(Case(1, a_init));
+            cout << cells[n].bac->get_genotype();
+        }
+    }*/
+
+
+
+COPY CONSTRUCTOR
+/*BacterieL::BacterieL(const BacterieL &b) : Bacteria(0){
+    rAA = b.rAA;
+    rAB = b.rAB;
+    cout << "L - ";
+}*/
+
+/*BacterieL* BacterieL::clone() {
+    return new BacterieL(*this);
+}*/
+
+
+/*BacterieS* BacterieS::clone() {
+    return new BacterieS(*this);
+}*/
+
+
+
+/*BacterieS::BacterieS(const BacterieS &b) : Bacteria(1){
+    rBB = b.rBB;
+    rBC = b.rBC;
+    cout << "S - ";
+}*/
+
+
+ In Bacteria :
+        //virtual Bacteria* clone () = 0;
+
+/*Bacteria::Bacteria(const Bacteria &b) {
+    w = b.w;
+    genotype = b.w;
+    A = b.A;
+    B = b.B;
+    C = b.C;
+    is_alive = b.is_alive;
+}*/
+

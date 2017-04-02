@@ -103,6 +103,14 @@ double Bacteria::fitness()
     return w;
 }
 
+void Bacteria::check_fitness()
+{
+    if ( w < w_min)
+    {
+        is_alive = false;
+    }
+}
+
 void Bacteria::dead_or_alive()
 {
     double probability = 0.0;     // probability is a float between 0 and 1 drawn randomly
@@ -110,7 +118,7 @@ void Bacteria::dead_or_alive()
     { //for i = 0, probability doesn't change significatively
         probability = static_cast <double>(rand()) / static_cast <double> (RAND_MAX);
     }
-    
+
     //cout << "Probabilité : " << probability << endl;
 
     if (probability <= p_death)

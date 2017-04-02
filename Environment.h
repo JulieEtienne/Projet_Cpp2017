@@ -8,10 +8,13 @@
 #include <vector>
 #include <algorithm>
 #include <time.h>
+#include <utility>
 
 using std::vector;
 using std::cout;
 using std::endl;
+using std::pair;
+using std::make_pair;
 
 class Environment {
 
@@ -39,9 +42,10 @@ class Environment {
         void search_and_fill_gaps();
         vector<int> search_BestFitness(int x, int y);
         void fill_gaps(int x, int y);
-        void diffusion(int x, int y);
+        void diffusion();
         void death_of_cells();
-	void display();
+        void clean_envir();
+	    void display();
 
     protected :
         // ===================================================================

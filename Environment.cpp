@@ -82,17 +82,31 @@ void Environment::initialize_grid()
 
 void Environment::search_and_fill_gaps()
 {
-    //Parcourir la grille, quand une case est vide,
-    //appelle fill_gaps
+    //Parcourir la grille, quand une case est vide, garder ses coord dans un
+    //vecteur, mélanger ce vecteur et puis appeler fill_gaps pour chaque case
+    vector<pair <int, int>> coords; // Will store the coords of empty Case
+    // Search for empty Case
     for (int i = 0; i < W; ++i) {
         for (int j = 0; j < H; ++j) {
             if (grid[i][j].amI_Empty()) {
-                cout << "Empty" << endl;
-                fill_gaps(i, j);
+                coords.push_back(make_pair(i, j)); // Add the coords to the vector
             }
         }
     }
-    cout << "La case vide a été remplie." << endl;
+
+    int r = 0; // will store a random number
+    int x = 0; // Will store the x coord of the empty Case
+    int y = 0; // Will store the y coord of the empty Case
+    unsigned int size_initial = coords.size(); // Initial number of coords
+    for (int n = 0; n < size_initial; n++) {
+        // Random number within [0,coords.size())
+        r = rand()%(coords.size());
+        x = coords[r].first;
+        y = coords[r].second;
+        fill_gaps(x, y);
+        coords.erase(coords.begin() + r); // Deletes the coords of the Case that just got filled
+    }
+    cout << "Toutes les cases vides ont été remplies." << endl;
 }
 
 vector<int> Environment::search_BestFitness(int x, int y)
@@ -172,6 +186,50 @@ void Environment::fill_gaps(int x, int y)
     grid[x][y].bac->set_C(new_C);
 }
 
+// Diffuse metabolites (applied to all cells at the same time)
+void Environment::diffusion()
+{
+    // Copy initial grid : "copy" will keep the concentration at time t
+    // Grid will store them at (t + 1)
+    vector<vector<Case>> copy = grid;
+    int temp_m = 0;
+    int temp_k = 0;
+
+    // Parcourir toutes les cases
+    for (int x = 0; x < W; ++x) {
+        for (int y = 0; y < H; ++y) {
+        // Autour de la case :
+            for (int i = -1; i <= 1; ++i) {
+                for (int j = - 1; j <= 1; ++j) {
+
+                    int k = x + i;
+                    int m = y + i;
+
+                    //Conditions aux bords
+                    k == -1 ? (temp_k = W-1) : 0;
+                    k == W ? (temp_k = 0) : 0;
+                    m == -1 ? (temp_m = H-1) : 0;
+                    m == H ? (temp_m = 0) : 0;
+
+                    copy[x][y].A_out += D * copy[x][y].A_out;
+                    copy[x][y].B_out += D * copy[x][y].B_out;
+                    copy[x][y].C_out += D * copy[x][y].C_out;
+
+                }
+            }
+
+            // End computations and update in grid :
+            grid[x][y].A_out = copy[x][y].A_out - 9 * D * copy[x][y].A_out;
+            grid[x][y].B_out = copy[x][y].B_out - 9 * D * copy[x][y].B_out;
+            grid[x][y].C_out = copy[x][y].C_out - 9 * D * copy[x][y].C_out;
+
+        }
+    }
+    display();
+    cout << "La diffusion est terminée." << endl;
+
+}
+
 void Environment::death_of_cells()
 {
     for (int i = 0; i < W; ++i)
@@ -183,35 +241,33 @@ void Environment::death_of_cells()
             {
                 grid[i][j].bac_IsDead();
                 cout << "La bactérie est bien morte" << endl;
-                diffusion(i, j);
+                //diffusion(i, j);
             }
         }
     }
 }
 
-void Environment::diffusion(int x, int y)
+// Cleans the environnement's solution
+void Environment::clean_envir()
 {
-    //Diffusion des composés
-    /**float a_next = grid[x][y].bac->get_A();
-    float b_next = grid[x][y].bac->get_B();
-    float c_next = grid[x][y].bac->get_C();
-    for (int i = -1; i <= 1; ++i) {
-        for (int j = - 1; j <= 1; ++j) {
-            int k = x + i;
-            int m = y + i;
 
-            k == -1 ? (temp_k = W-1) : 0;
-            k == W ? (temp_k = 0) : 0;
-            m == -1 ? (temp_m = H-1) : 0;
-            m == H ? (temp_m = 0) : 0;
-
-            a_next = a_next + D * ;**/
-
+    for (int i = 0; i < W; ++i)
+    {
+        for (int j = 0; j < H; ++j)
+        {
+            grid[i][j].A_out = a_init;
+            grid[i][j].B_out = 0;
+            grid[i][j].C_out = 0;
+        }
+    }
+    cout << "La grille a été vidée et nettoyée." << endl;
+    display();
 }
 
 // Display grid and check if a Case if empty
 void Environment::display()
 {
+    cout << "Genotypes : " << endl;
     for (int i = 0; i < W; ++i) {
         for (int j = 0; j < H; ++j) {
             if(grid[i][j].amI_Empty()) cout << "Empty Case" << endl;
@@ -219,4 +275,30 @@ void Environment::display()
         }
         cout << endl;
     }
+
+    cout << "A concentration : " << endl;
+    for (int i = 0; i < W; ++i) {
+        for (int j = 0; j < H; ++j) {
+            cout << grid[i][j].A_out;
+        }
+        cout << endl;
+    }
+
+    cout << "B concentration : " << endl;
+    for (int i = 0; i < W; ++i) {
+        for (int j = 0; j < H; ++j) {
+            cout << grid[i][j].B_out;
+        }
+        cout << endl;
+    }
+
+    cout << "C concentration : " << endl;
+    for (int i = 0; i < W; ++i) {
+        for (int j = 0; j < H; ++j) {
+            cout << grid[i][j].C_out;
+        }
+        cout << endl;
+    }
+
+    // SEG FAULT DE TEMPS EN TEMPS, IL DIT QU'UNE CASE EST EMPTY
 }
