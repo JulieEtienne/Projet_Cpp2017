@@ -145,12 +145,12 @@ void Environment::search_and_fill_gaps()
 // This function browses all the Cases around the empty cell which coordinates
 // are given as parameters, and compare their fitness to find the best one.
 // It returns the coordinates of the cell which bacteria has the best fitness
+
+// SEQ_FAULT when all the Cases in the Moore neighbourhood point NULL
 vector<int> Environment::search_BestFitness(int x, int y)
 {
-    cout << "BEGIN BEST_FITNESS" << endl;
     // Temporary maximum fitness
-    float max_fit = 0;
-    int a = 0;
+    float max_fit = -1.0;
     // Will receive the coord of the best bacteria
     vector<int> best(2);
     // Search for the best fitnes :
@@ -159,8 +159,7 @@ vector<int> Environment::search_BestFitness(int x, int y)
         for (int m = y - 1; m <= y + 1; ++m)
         {
             // Will store the fitness of the current bacteria
-            float fit = 0;
-            a++;
+            float fit = 0.0001;
 
             // Check conditions of toroidal grid
             int temp_k = k;
@@ -170,37 +169,25 @@ vector<int> Environment::search_BestFitness(int x, int y)
             m == -1 ? (temp_m = H-1) : 0;
             m == H ? (temp_m = 0) : 0;
 
-            if (grid[temp_k][temp_m].amI_Empty())
+            if (grid[temp_k][temp_m].bac)
             {
-                cout << "empty" << temp_k << " - " << temp_m << endl;
-            }
-            else
-            {
-                cout << "hi" << endl;
-                cout << temp_k << " - " << temp_m << endl;
                 fit = grid[temp_k][temp_m].bac->get_fitness();
+                // Compares the fitnesses
+                if (fit > max_fit)
+                {
+                    max_fit = fit;
+                    best[0] = temp_k;
+                    best[1] = temp_m;
+                }
             }
-
-            // Compares the fitnesses
-            if (fit > max_fit)
-            {
-                max_fit = fit;
-                best[0] = temp_k;
-                best[1] = temp_m;
-            }
-            cout << best[0] << " - " << best[1]<< endl;
-
         }
     }
-
-    if (grid[0][0].bac == NULL) cout << "..." << endl;
-    cout << grid[best[0]][best[1]].bac->get_fitness() << endl;
     // Returns the coordinates
     return best;
 
 }
 
-// The parameters are those of the empty cell
+// The parameters are those of the empty cells
 void Environment::fill_gaps(int x, int y)
 {
     // Retrieves the coordinates of the bacteria who will be considered
@@ -231,9 +218,9 @@ void Environment::fill_gaps(int x, int y)
 
     // The "Mum" is going to divide herself into 2 daughter cells :
     // First, check we have concentrations != 0
-    new_A = new_A / 2.0;
-    new_B = new_B / 2.0;
-    new_C = new_C / 2.0;
+    new_A /= 2.0;
+    new_B /= 2.0;
+    new_C /= 2.0;
     // Set the new concentrations in the bacteria "Mum"
     grid[x_mum][y_mum].bac->set_A(new_A);
     grid[x_mum][y_mum].bac->set_B(new_B);
@@ -301,8 +288,6 @@ void Environment::diffusion()
             grid[x][y].C_out = copy[x][y].C_out - 9 * D * grid[x][y].C_out;
         }
     }
-
-    display();
     cout << "La diffusion est terminée." << endl;
 }
 
@@ -348,6 +333,23 @@ void Environment::clean_envir()
     cout << "La grille a été vidée et nettoyée." << endl;
 }
 
+vector<float> Environment::count_cells()
+{
+    float L = 0;
+    float S = 0;
+    vector<float> bacteria(2);
+    for (int i = 0; i < W; ++i)
+    {
+        for (int j = 0; j < H; ++j)
+        {
+            grid[i][j].bac->get_genotype() == 0 ? L+=1 : S+=1;
+        }
+    }
+    bacteria[0] = L;
+    bacteria[1] = S;
+    return bacteria;
+}
+
 // Display grid and check if a Case is empty
 void Environment::display()
 {
@@ -356,21 +358,21 @@ void Environment::display()
     {
         for (int j = 0; j < H; ++j)
         {
-            if(grid[i][j].amI_Empty()) cout << "Empty Case" << endl;
-            cout << grid[i][j].bac->get_genotype() << "\t";
+            if(grid[i][j].amI_Empty()) cout << "X \t";
+            else cout << grid[i][j].bac->get_genotype() << " ; " << grid[i][j].bac->get_fitness() << "\t";
         }
         cout << endl;
     }
 
-    cout << "A concentration : " << endl;
-    for (int i = 0; i < W; ++i)
-    {
-        for (int j = 0; j < H; ++j)
-        {
-            cout << grid[i][j].A_out << "\t";
-        }
-        cout << endl;
-    }
+    // cout << "A concentration : " << endl;
+    // for (int i = 0; i < W; ++i)
+    // {
+    //     for (int j = 0; j < H; ++j)
+    //     {
+    //         cout << grid[i][j].A_out << "\t";
+    //     }
+    //     cout << endl;
+    // }
 
     // cout << "B concentration : " << endl;
     // for (int i = 0; i < W; ++i)

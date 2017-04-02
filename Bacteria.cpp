@@ -14,7 +14,7 @@ using std::endl;
 // ===========================================================================
 float Bacteria::w_min = 0.001;
 float Bacteria::p_mut = 0;
-float Bacteria::p_death = 0.8;
+float Bacteria::p_death = 0.02;
 
 // ===========================================================================
 //                             Constructors
