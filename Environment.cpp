@@ -92,8 +92,8 @@ void Environment::initialize_grid()
         }
     }
     // Check total number of bacteria created
-    cout << "Nb 0 : " << zero << " Nb 1 : "<< one << endl;
-    cout << "Grille initialisée." << endl;
+    //cout << "Nb 0 : " << zero << " Nb 1 : "<< one << endl;
+    //cout << "Grille initialisée." << endl;
 }
 
 // Scans the grid, and when if finds an empty Case, keeps its coordinates
@@ -139,7 +139,7 @@ void Environment::search_and_fill_gaps()
         // so that we can't choose it again in the loop
         coords.erase(coords.begin() + r);
     }
-    cout << "Toutes les cases vides ont été remplies." << endl;
+    //cout << "Toutes les cases vides ont été remplies." << endl;
 }
 
 // This function browses all the Cases around the empty cell which coordinates
@@ -288,7 +288,7 @@ void Environment::diffusion()
             grid[x][y].C_out = copy[x][y].C_out - 9 * D * grid[x][y].C_out;
         }
     }
-    cout << "La diffusion est terminée." << endl;
+    //cout << "La diffusion est terminée." << endl;
 }
 
 void Environment::death_of_cells()
@@ -330,7 +330,7 @@ void Environment::clean_envir()
             grid[i][j].C_out = 0;
         }
     }
-    cout << "La grille a été vidée et nettoyée." << endl;
+    //cout << "La grille a été vidée et nettoyée." << endl;
 }
 
 vector<float> Environment::count_cells()
@@ -348,6 +348,17 @@ vector<float> Environment::count_cells()
     bacteria[0] = L;
     bacteria[1] = S;
     return bacteria;
+}
+
+void Environment::maj_fitness()
+{
+    for (int i = 0; i < W; ++i)
+    {
+        for (int j = 0; j < H; ++j)
+        {
+            grid[i][j].bac->fitness();
+        }
+    }
 }
 
 // Display grid and check if a Case is empty

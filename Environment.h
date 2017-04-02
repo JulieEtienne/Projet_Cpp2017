@@ -60,6 +60,7 @@ class Environment
         // grid must be cleaned sometimes, this is why this function is here
         void clean_envir();
         vector<float> count_cells();
+        void maj_fitness();
         // Shows the grid under different angles of parameters
 	    void display();
 
