@@ -47,8 +47,6 @@ class Bacteria
         virtual void metabolism(float &conc_out);
         // Computes the fitness of the Bacteria, depending on its type
         void fitness();
-        // Check if the fitness is above the minimum value required
-        void check_fitness();
         // Uses a probability of death to make the bacteria die or not
         void dead_or_alive();
         // Uses a probability of mutation to make

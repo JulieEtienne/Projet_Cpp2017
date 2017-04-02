@@ -107,12 +107,7 @@ void Bacteria::fitness()
     {
         w = C;
     }
-}
-
-void Bacteria::check_fitness()
-{
-    // If its fitness if lower than w_min, the bacteria will die
-    w < w_min ? is_alive = false : 0;
+    w < w_min ? w = 0 : 0;
 }
 
 void Bacteria::dead_or_alive()
