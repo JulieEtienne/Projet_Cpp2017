@@ -59,6 +59,7 @@ class Environment
         // In order to have a good environment for the bacterias, the
         // grid must be cleaned sometimes, this is why this function is here
         void clean_envir();
+        vector<float> count_cells();
         // Shows the grid under different angles of parameters
 	    void display();
 
