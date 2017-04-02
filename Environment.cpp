@@ -65,21 +65,21 @@ void Environment::initialize_grid()
             // otherwise, if p > 50, or if there are too many L, fill with an S
             if ((p < 50 && zero < num) || (p >= 50 && one >= num))
             {
-                a = 1;
+                a = 0;
             }
             else if ((p >= 50 && one < num) || (p < 50 && zero >= num))
             {
-                a = 2;
+                a = 1;
             }
 
             //Filling, depending on the value taken by a :
-            if (a == 1)
+            if (a == 0)
             {
                 // A bacteria of type L is created
                 grid[i][j] = Case(0, a_init);
                 zero++;
             }
-            else if (a == 2)
+            else if (a == 1)
             {
                 // A bacteria of type S is created
                 grid[i][j] = Case(1, a_init);
@@ -295,6 +295,17 @@ void Environment::death_of_cells()
     }
 }
 
+void Environment::metabolism_of_cells()
+{
+    for (int i = 0; i < W; ++i)
+    {
+        for (int j = 0; j < H; ++j)
+        {
+            grid[i][j].manage_metabolism();
+        }
+    }
+}
+
 void Environment::clean_envir()
 {
     for (int i = 0; i < W; ++i)
@@ -319,7 +330,7 @@ void Environment::display()
         for (int j = 0; j < H; ++j)
         {
             if(grid[i][j].amI_Empty()) cout << "Empty Case" << endl;
-            cout << grid[i][j].bac->get_genotype();
+            cout << grid[i][j].bac->get_genotype() << "\t";
         }
         cout << endl;
     }
@@ -329,7 +340,7 @@ void Environment::display()
     {
         for (int j = 0; j < H; ++j)
         {
-            cout << grid[i][j].A_out;
+            cout << grid[i][j].A_out << "\t";
         }
         cout << endl;
     }
@@ -339,7 +350,7 @@ void Environment::display()
     {
         for (int j = 0; j < H; ++j)
         {
-            cout << grid[i][j].B_out;
+            cout << grid[i][j].B_out << "\t";
         }
         cout << endl;
     }
@@ -349,7 +360,7 @@ void Environment::display()
     {
         for (int j = 0; j < H; ++j)
         {
-            cout << grid[i][j].C_out;
+            cout << grid[i][j].C_out << "\t";
         }
         cout << endl;
     }

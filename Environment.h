@@ -53,6 +53,8 @@ class Environment
         void diffusion();
         // Check if a bacteria is dead, and deals with it if it is the case
         void death_of_cells();
+        // Applies the metabolism for each cell
+        void metabolism_of_cells();
         // In order to have a good environment for the bacterias, the
         // grid must be cleaned sometimes, this is why this function is here
         void clean_envir();
