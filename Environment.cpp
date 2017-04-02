@@ -101,7 +101,7 @@ void Environment::initialize_grid()
 // each empty Case will then be filled.
 void Environment::search_and_fill_gaps()
 {
-     // Will store the coords of empty Cases
+    // Will store the coords of empty Cases
     vector<pair <int, int>> coords;
     // Search for empty Cases
     for (int i = 0; i < W; ++i)
@@ -112,7 +112,6 @@ void Environment::search_and_fill_gaps()
             {
                 // Adds its coordinates to the vector
                 coords.push_back(make_pair(i, j));
-                cout << "JUSQUE LÀ ÇA MARCHE !" << i << j << endl;
             }
         }
     }
@@ -148,8 +147,10 @@ void Environment::search_and_fill_gaps()
 // It returns the coordinates of the cell which bacteria has the best fitness
 vector<int> Environment::search_BestFitness(int x, int y)
 {
+    cout << "BEGIN BEST_FITNESS" << endl;
     // Temporary maximum fitness
-    int max_fit = 0;
+    float max_fit = 0;
+    int a = 0;
     // Will receive the coord of the best bacteria
     vector<int> best(2);
     // Search for the best fitnes :
@@ -158,7 +159,8 @@ vector<int> Environment::search_BestFitness(int x, int y)
         for (int m = y - 1; m <= y + 1; ++m)
         {
             // Will store the fitness of the current bacteria
-            int fit = 0;
+            float fit = 0;
+            a++;
 
             // Check conditions of toroidal grid
             int temp_k = k;
@@ -168,8 +170,14 @@ vector<int> Environment::search_BestFitness(int x, int y)
             m == -1 ? (temp_m = H-1) : 0;
             m == H ? (temp_m = 0) : 0;
 
-            if (grid[temp_k][temp_m].bac)
+            if (grid[temp_k][temp_m].amI_Empty())
             {
+                cout << "empty" << temp_k << " - " << temp_m << endl;
+            }
+            else
+            {
+                cout << "hi" << endl;
+                cout << temp_k << " - " << temp_m << endl;
                 fit = grid[temp_k][temp_m].bac->get_fitness();
             }
 
@@ -180,14 +188,19 @@ vector<int> Environment::search_BestFitness(int x, int y)
                 best[0] = temp_k;
                 best[1] = temp_m;
             }
+            cout << best[0] << " - " << best[1]<< endl;
+
         }
     }
+
+    if (grid[0][0].bac == NULL) cout << "..." << endl;
+    cout << grid[best[0]][best[1]].bac->get_fitness() << endl;
     // Returns the coordinates
     return best;
 
 }
 
-// The parameters are those of a bacteria with the current best fitness
+// The parameters are those of the empty cell
 void Environment::fill_gaps(int x, int y)
 {
     // Retrieves the coordinates of the bacteria who will be considered
@@ -218,9 +231,9 @@ void Environment::fill_gaps(int x, int y)
 
     // The "Mum" is going to divide herself into 2 daughter cells :
     // First, check we have concentrations != 0
-    new_A == 0 ? 0 : new_A = new_A / 2.0;
-    new_B == 0 ? 0 : new_B = new_B / 2.0;
-    new_C == 0 ? 0 : new_C = new_C / 2.0;
+    new_A = new_A / 2.0;
+    new_B = new_B / 2.0;
+    new_C = new_C / 2.0;
     // Set the new concentrations in the bacteria "Mum"
     grid[x_mum][y_mum].bac->set_A(new_A);
     grid[x_mum][y_mum].bac->set_B(new_B);

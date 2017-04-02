@@ -71,11 +71,13 @@ bool Case::amI_Empty()
 // Depending on the type of bacteria, calls a metabolism or the other
 void Case::manage_metabolism()
 {
-    if (bac->genotype == 0) //If bacteria L...
+    //If bacteria L...
+    if (bac->genotype == 0)
     {
         bac->metabolism(A_out);
     }
-    else if (bac->genotype == 1) //If bacteria S...
+    //If bacteria S...
+    else if (bac->genotype == 1)
     {
         bac->metabolism(B_out);
     }

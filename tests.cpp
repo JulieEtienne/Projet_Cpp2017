@@ -14,7 +14,6 @@ using std::pair;
 #include "Case.h"
 #include "Environment.h"
 
-
 int main() {
 	srand(time(NULL));     // srand (static_cast <unsigned> (time(NULL)));
 
@@ -22,7 +21,6 @@ int main() {
     int H = 10;
     float a_init = 0.2;
 	float D = 0.1;
-
 
     Environment environment_ = Environment(W, H, a_init, D);
     environment_.display();
