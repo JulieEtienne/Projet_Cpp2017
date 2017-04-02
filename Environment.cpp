@@ -112,7 +112,6 @@ void Environment::search_and_fill_gaps()
             {
                 // Adds its coordinates to the vector
                 coords.push_back(make_pair(i, j));
-                cout << "JUSQUE LÀ ÇA MARCHE !" << i << j << endl;
             }
         }
     }
@@ -218,9 +217,9 @@ void Environment::fill_gaps(int x, int y)
 
     // The "Mum" is going to divide herself into 2 daughter cells :
     // First, check we have concentrations != 0
-    new_A == 0 ? 0 : new_A = new_A / 2.0;
-    new_B == 0 ? 0 : new_B = new_B / 2.0;
-    new_C == 0 ? 0 : new_C = new_C / 2.0;
+    new_A /= 2.0;
+    new_B /= 2.0;
+    new_C /= 2.0;
     // Set the new concentrations in the bacteria "Mum"
     grid[x_mum][y_mum].bac->set_A(new_A);
     grid[x_mum][y_mum].bac->set_B(new_B);
