@@ -11,7 +11,7 @@ Environment::Environment()
     W = 0;
     H = 0;
     a_init = 0.0;
-    cout << "La grille est vide.\n" << endl;
+    //cout << "La grille est vide.\n" << endl;
 }
 
 Environment::Environment(int W_, int H_, float a_initial, float diff_coeff)
@@ -87,7 +87,7 @@ void Environment::initialize_grid()
             }
             else
             {
-                cout << "Too many cells, not enough space." << endl;
+                //cout << "Too many cells, not enough space." << endl;
             }
         }
     }
