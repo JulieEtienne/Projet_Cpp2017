@@ -23,7 +23,7 @@ BacterieL::~BacterieL() {}
 // ===========================================================================
 void BacterieL::metabolism(float &out)
 {
-    out *= (1 - rAA);
-    A = out * rAA + A * (1 - rAB);
-    B += A * rAB;
+    out -= out * 0.1 * rAA;
+    A += out * 0.1 * rAA - A * 0.1 * rAB;
+    B += A * 0.1 * rAB;
 }
