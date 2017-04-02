@@ -11,7 +11,7 @@ Environment::Environment()
     W = 0;
     H = 0;
     a_init = 0.0;
-    cout << "La grille est vide.\n" << endl;
+    //cout << "La grille est vide.\n" << endl;
 }
 
 Environment::Environment(int W_, int H_, float a_initial, float diff_coeff)
@@ -87,7 +87,7 @@ void Environment::initialize_grid()
             }
             else
             {
-                cout << "Too many cells, not enough space." << endl;
+                //cout << "Too many cells, not enough space." << endl;
             }
         }
     }
@@ -101,7 +101,7 @@ void Environment::initialize_grid()
 // each empty Case will then be filled.
 void Environment::search_and_fill_gaps()
 {
-     // Will store the coords of empty Cases
+    // Will store the coords of empty Cases
     vector<pair <int, int>> coords;
     // Search for empty Cases
     for (int i = 0; i < W; ++i)
