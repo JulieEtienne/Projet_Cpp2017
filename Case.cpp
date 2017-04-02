@@ -36,12 +36,11 @@ Case::Case(int b_genotype, float a_init)
     {
         bac = NULL;
     }
+
     A_out = a_init;
     B_out = 0;
     C_out = 0;
 }
-
-
 
 // ===========================================================================
 //                             Destructor
@@ -65,9 +64,11 @@ Case::~Case()
 // ===========================================================================
 bool Case::amI_Empty()
 {
+    // The Case is empty is the pointer to a bacteria is a null pointer
     return (bac == NULL);
 }
 
+// Depending on the type of bacteria, calls a metabolism or the other
 void Case::manage_metabolism()
 {
     if (bac->genotype == 0) //If bacteria L...
@@ -84,12 +85,15 @@ void Case::bac_IsDead()
 {
     if (bac->is_alive == false)
     {
+        // When bac dies, it releases its metabolites into the Case it was in
         A_out += bac->A;
         B_out += bac->B;
         C_out += bac->C;
         delete bac;
         bac = NULL;
-    } else {
+    }
+    else
+    {
         cout << "Bacteria is alive, can't apply bac_IsDead()..." << endl;
     }
 }

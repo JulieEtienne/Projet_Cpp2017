@@ -20,9 +20,12 @@ class Case
         // ===================================================================
         //                          Constructors
         // ===================================================================
-        Case(); // Default constructor
-        Case(float a_init); //Initial glucose concentration in this case
-        Case(int b_genotype, float a_init); //Initial [glucose] and type S or L of bacteria
+        // Default constructor
+        Case();
+        // Constructor with initial glucose concentration in this case
+        Case(float a_init);
+        // Constructor with initial [glucose] and type S or L of bacteria
+        Case(int b_genotype, float a_init);
 
         // ===================================================================
         //                          Destructor
@@ -32,18 +35,25 @@ class Case
         // ===================================================================
         //                          Public Methods
         // ===================================================================
+        // Returns if a Case is containing a bacteria (not empty) or not (empty)
         bool amI_Empty();
+        // Will manage the metabolism of the bacteria the Case is containing
         void manage_metabolism();
+        // Manages the fact that the bacteria is dead or not :
+        // makes it die if needed
         void bac_IsDead();
 
     protected :
         // ===================================================================
         //                          Attributes
         // ===================================================================
-        Bacteria *bac; // bac is a Bacteria
-
+        // bac is the Bacteria contained in the Case
+        Bacteria *bac;
+        // Concentration of glucose in the Case
         float A_out;
+        // Concentration of acetate in the Case
         float B_out;
+        // Concentration of ethanol in the Case
         float C_out;
 
 };

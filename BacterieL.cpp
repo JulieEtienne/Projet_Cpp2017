@@ -21,7 +21,7 @@ BacterieL::~BacterieL() {}
 // ===========================================================================
 //                             Public Methods
 // ===========================================================================
-void BacterieL::metabolism(float A_out)
+void BacterieL::metabolism(float &A_out)
 {
     A_out *= (1 - rAA);
     A = A_out * rAA + A * (1 - rAB);
