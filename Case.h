@@ -21,7 +21,6 @@ class Case
         //                          Constructors
         // ===================================================================
         Case(); // Default constructor
-        //Case(const Case &obj); // Copy constructor
         Case(float a_init); //Initial glucose concentration in this case
         Case(int b_genotype, float a_init); //Initial [glucose] and type S or L of bacteria
 
@@ -29,13 +28,6 @@ class Case
         //                          Destructor
         // ===================================================================
         ~Case();
-
-        // ===================================================================
-        //                        Getters
-        // ===================================================================
-        float get_Aout() const;
-        float get_Bout() const;
-        float get_Cout() const;
 
         // ===================================================================
         //                          Public Methods

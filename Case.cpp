@@ -14,18 +14,6 @@ Case::Case()
     C_out = 0;
 }
 
-/*Case::Case(const Case &obj) {
-    if (obj.bac != NULL) {
-        bac = obj.bac->clone();
-    } else {
-        bac = NULL;
-    }
-
-    A_out = obj.A_out;
-    B_out = obj.B_out;
-    C_out = obj.C_out;
-}*/
-
 Case::Case(float a_init)
 {
     bac = NULL;
@@ -70,24 +58,6 @@ Case::~Case()
     } else {
         cout << "Was empty" << endl;
     }*/
-}
-
-// ===========================================================================
-//                              Getters
-// ===========================================================================
-float Case::get_Aout() const
-{
-    return A_out;
-}
-
-float Case::get_Bout() const
-{
-    return B_out;
-}
-
-float Case::get_Cout() const
-{
-    return C_out;
 }
 
 // ===========================================================================

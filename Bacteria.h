@@ -38,7 +38,7 @@ class Bacteria {
         //                          Public Methods
         // ===================================================================
 
-        virtual void metabolism(float &out);
+        virtual void metabolism(float conc_out);
         void fitness();
         void check_fitness();
         void dead_or_alive();

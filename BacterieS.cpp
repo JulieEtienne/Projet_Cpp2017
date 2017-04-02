@@ -22,9 +22,9 @@ BacterieS::~BacterieS() {}
 // ===========================================================================
 //                             Public Methods
 // ===========================================================================
-void BacterieS::metabolism(float &out)
+void BacterieS::metabolism(float B_out)
 {
-    out *= (1 - rBB);
-    B = out * rBB + B * (1 - rBC);
+    B_out *= (1 - rBB);
+    B = B_out * rBB + B * (1 - rBC);
     C += B * rBC;
 }

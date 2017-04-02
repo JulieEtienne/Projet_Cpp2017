@@ -243,7 +243,6 @@ void Environment::death_of_cells()
             {
                 grid[i][j].bac_IsDead();
                 cout << "La bactérie est bien morte" << endl;
-                //diffusion(i, j);
             }
         }
     }

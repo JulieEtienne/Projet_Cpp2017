@@ -84,10 +84,7 @@ void Bacteria::set_C(float c) {
 // ===========================================================================
 //                          Public Methods
 // ===========================================================================
-void Bacteria::metabolism(float &out)
-{
-
-}
+void Bacteria::metabolism(float conc_out) {}
 
 void Bacteria::fitness()
 {
