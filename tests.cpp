@@ -40,7 +40,8 @@ int main() {
 
 	environment_.death_of_cells();
 	environment_.diffusion();
-	
+	environment_.clean_envir();
+
     delete bacL;
     delete bacS;
 

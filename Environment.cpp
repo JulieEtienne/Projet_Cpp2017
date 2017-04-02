@@ -188,23 +188,6 @@ void Environment::fill_gaps(int x, int y)
     grid[x][y].bac->set_C(new_C);
 }
 
-void Environment::death_of_cells()
-{
-    for (int i = 0; i < W; ++i)
-    {
-        for (int j = 0; j < H; ++j)
-        {
-            grid[i][j].bac->dead_or_alive();
-            if (grid[i][j].bac->get_is_alive() == false)
-            {
-                grid[i][j].bac_IsDead();
-                cout << "La bactérie est bien morte" << endl;
-                //diffusion(i, j);
-            }
-        }
-    }
-}
-
 // Diffuse metabolites (applied to all cells at the same time)
 void Environment::diffusion()
 {
@@ -249,6 +232,39 @@ void Environment::diffusion()
 
 }
 
+void Environment::death_of_cells()
+{
+    for (int i = 0; i < W; ++i)
+    {
+        for (int j = 0; j < H; ++j)
+        {
+            grid[i][j].bac->dead_or_alive();
+            if (grid[i][j].bac->get_is_alive() == false)
+            {
+                grid[i][j].bac_IsDead();
+                cout << "La bactérie est bien morte" << endl;
+                //diffusion(i, j);
+            }
+        }
+    }
+}
+
+// Cleans the environnement's solution
+void Environment::clean_envir()
+{
+
+    for (int i = 0; i < W; ++i)
+    {
+        for (int j = 0; j < H; ++j)
+        {
+            grid[i][j].A_out = a_init;
+            grid[i][j].B_out = 0;
+            grid[i][j].C_out = 0;
+        }
+    }
+    cout << "La grille a été vidée et nettoyée." << endl;
+    display();
+}
 
 // Display grid and check if a Case if empty
 void Environment::display()
@@ -266,6 +282,22 @@ void Environment::display()
     for (int i = 0; i < W; ++i) {
         for (int j = 0; j < H; ++j) {
             cout << grid[i][j].A_out;
+        }
+        cout << endl;
+    }
+
+    cout << "B concentration : " << endl;
+    for (int i = 0; i < W; ++i) {
+        for (int j = 0; j < H; ++j) {
+            cout << grid[i][j].B_out;
+        }
+        cout << endl;
+    }
+
+    cout << "C concentration : " << endl;
+    for (int i = 0; i < W; ++i) {
+        for (int j = 0; j < H; ++j) {
+            cout << grid[i][j].C_out;
         }
         cout << endl;
     }

@@ -44,7 +44,8 @@ class Environment {
         void fill_gaps(int x, int y);
         void diffusion();
         void death_of_cells();
-	void display();
+        void clean_envir();
+	    void display();
 
     protected :
         // ===================================================================
