@@ -31,8 +31,8 @@ Bacteria::Bacteria()
 
 Bacteria::Bacteria(int genotype_)
 {
-    genotype = genotype_;
     w = 0;
+    genotype = genotype_;
     A = 0;
     B = 0;
     C = 0;
@@ -42,59 +42,67 @@ Bacteria::Bacteria(int genotype_)
 // ===========================================================================
 //                              Getters
 // ===========================================================================
-int Bacteria::get_genotype() const {
+int Bacteria::get_genotype() const
+{
     return genotype;
 }
 
-float Bacteria::get_fitness() const {
+float Bacteria::get_fitness() const
+{
     return w;
 }
 
-float Bacteria::get_A() const {
+float Bacteria::get_A() const
+{
     return A;
 }
 
-float Bacteria::get_B() const {
+float Bacteria::get_B() const
+{
     return B;
 }
 
-float Bacteria::get_C() const {
+float Bacteria::get_C() const
+{
     return C;
 }
 
-bool Bacteria::get_is_alive() const {
+bool Bacteria::get_is_alive() const
+{
     return is_alive;
 }
 
 // ===========================================================================
 //                              Setters
 // ===========================================================================
-void Bacteria::set_A(float a) {
+void Bacteria::set_A(float a)
+{
     A = a;
 }
 
-void Bacteria::set_B(float b) {
+void Bacteria::set_B(float b)
+{
     B = b;
 }
 
-void Bacteria::set_C(float c) {
+void Bacteria::set_C(float c)
+{
     C = c;
 }
 
 // ===========================================================================
 //                          Public Methods
 // ===========================================================================
-void Bacteria::metabolism(float &out)
-{
-
-}
+void Bacteria::metabolism(float &conc_out) {}
 
 void Bacteria::fitness()
 {
+    // If it is a bacteria of type L...
     if(genotype == 0)
     {
         w = B;
     }
+    // If it is a bacteria of type S...
     else if(genotype == 1)
     {
         w = C;
@@ -103,34 +111,38 @@ void Bacteria::fitness()
 
 void Bacteria::check_fitness()
 {
+    // If its fitness if lower than w_min, the bacteria will die
     w < w_min ? is_alive = false : 0;
 }
 
 void Bacteria::dead_or_alive()
 {
-    double probability = 0.0;     // probability is a float between 0 and 1 drawn randomly
+    // Probability p is a float between 0 and 1 drawn randomly
+    double p = 0.0;
+    // For i = 0, proba doesn't change significatively
     for(auto i = 0;  i < 2; i++)
-    { //for i = 0, probability doesn't change significatively
-        probability = static_cast <double>(rand()) / static_cast <double> (RAND_MAX);
+    {
+        p = static_cast <double>(rand()) / static_cast <double> (RAND_MAX);
     }
 
-    //cout << "Probabilité : " << probability << endl;
-
-    if (probability <= p_death)
+    // If p is lower or equal the p_death, the bacteria will die
+    if (p <= p_death)
     {
         is_alive = false;
     }
-    check_fitness();
 }
 
 void Bacteria::mutation()
 {
-    double probability = 0.0;
+    double p = 0.0;
+
     for(auto i = 0; i < 2; i++)
     {
-        probability = static_cast <double>(rand()) / static_cast <double> (RAND_MAX);
+        p = static_cast <double>(rand()) / static_cast <double> (RAND_MAX);
     }
-    if (probability <= p_mut)
+
+    // If p is lower or equal the p_death, the bac's genotype will change
+    if (p <= p_mut)
     {
         if (genotype == 0)
         {
@@ -142,8 +154,6 @@ void Bacteria::mutation()
         }
     }
 }
-
-
 
 // ===========================================================================
 //                              Display

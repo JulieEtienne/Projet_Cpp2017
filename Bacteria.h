@@ -1,15 +1,19 @@
 #ifndef BACTERIA_H
 #define BACTERIA_H
 
-class Bacteria {
+class Bacteria
+{
 
-    friend class Case; //class Case can now access data directly
+    //class Case can now access data directly
+    friend class Case;
 
     public :
         // ===================================================================
         //                          Constructors
         // ===================================================================
-        Bacteria(); // Default constructor
+        // Default constructor
+        Bacteria();
+        // Constructor with the genotype as parameter
         Bacteria(int genotype_);
 
         // ===================================================================
@@ -37,32 +41,48 @@ class Bacteria {
         // ===================================================================
         //                          Public Methods
         // ===================================================================
-
-        virtual void metabolism(float &out);
+        // Code for the metabolisme of the bacteria :
+        // will differ depending on the type of bacteria
+        // Parameter is a reference, to keep it update after the fonction's done
+        virtual void metabolism(float &conc_out);
+        // Computes the fitness of the Bacteria, depending on its type
         void fitness();
+        // Check if the fitness is above the minimum value required
         void check_fitness();
+        // Uses a probability of death to make the bacteria die or not
         void dead_or_alive();
+        // Uses a probability of mutation to make
+        // the bacteria's genotype change or not
         void mutation();
 
         // ===================================================================
         //                           Display
         // ===================================================================
-        virtual void display();
+        void display();
 
     protected :
         // ===================================================================
         //                           Attributes
         // ===================================================================
-        static float w_min; // Minimum allowed fitness value
+        // Minimum allowed fitness value
+        static float w_min;
+        // Mutation probability
         static float p_mut;
+        // Death probability
         static float p_death;
 
-        float w; // Bacteria's fitness
-        int genotype; // Bacteria's genotype : 0 or 1
-        float A; // Internal concentration of Glucose
-        float B; // Internal concentration of Acetate
-        float C; // Internal concentration of Ethanol
-        bool is_alive; //True or False
+        // Bacteria's fitness
+        float w;
+         // Bacteria's genotype : 0 ( = L) or 1 (= S)
+        int genotype;
+        // Internal concentration of Glucose
+        float A;
+        // Internal concentration of Acetate
+        float B;
+        // Internal concentration of Ethanol
+        float C;
+        // Tells if the bacteria is alive (True) or not (False)
+        bool is_alive;
 
 };
 

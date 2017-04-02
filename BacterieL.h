@@ -17,6 +17,7 @@ class BacterieL : public Bacteria
         // ===================================================================
         //                          Constructors
         // ===================================================================
+        // Default constructor
         BacterieL();
 
         // ===================================================================
@@ -27,13 +28,17 @@ class BacterieL : public Bacteria
         // ===================================================================
         //                          Public Methods
         // ===================================================================
-        void metabolism(float &out) override;
+        // Metabolism of the L-type bacteria
+        // A_out is the concentration of A in the environment cell
+        void metabolism(float &A_out) override;
 
     protected :
         // ===================================================================
         //                          Attributes
         // ===================================================================
+        // Metabolic rate A-A
         float rAA;
+        // Metabolic rate A-B
         float rAB;
 };
 
