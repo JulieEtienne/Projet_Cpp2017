@@ -63,6 +63,8 @@ int main() {
 	// Close the file
 	fs.close();
 
+	//std::system(std::to_string("results.R ./filename"));
+
     return EXIT_SUCCESS;
 }
 
