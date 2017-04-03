@@ -24,7 +24,7 @@ using std::ofstream;
 //ofstream output;
 ofstream fs;
 // Create a name for the file output
-string filename = "resultats.csv";
+string filename = "resultats4.csv";
 
 int W;
 int H;
@@ -39,14 +39,24 @@ int main() {
 
 	// Create and open the .csv file
 	fs.open(filename);
-	// Write the headers :
-	fs << "L" << "," << "S" << "," << "A_init" << "," << "T" << endl;
+	// Check the good opening of the file
+	if (fs.is_open())
+	{
+		cout << "File successfully opened" << endl;
+		// Write the headers :
+		fs << "L" << "," << "S" << "," << "A_init" << "," << "T" << endl;
+	}
+	else
+	{
+		cout << "Error while opening" << endl;
+		return -1;
+	}
 
-    W = 10;
-    H = 10;
+    W = 32;
+    H = 32;
 	D = 0.1;
 
-	for (float a = 0; a <= 50; a += 10)
+	for (float a = 0; a <= 0.002; a += 0.0001)
 	{
 		environment_ = Environment(W, H, a, D);
 		for (float T = 1; T <= 1500; T += 100)
@@ -63,7 +73,8 @@ int main() {
 	// Close the file
 	fs.close();
 
-	//std::system(std::to_string("results.R ./filename"));
+	//string system_str = "Rscript results.R blah.pdf";
+	//std::system(system_str);
 
     return EXIT_SUCCESS;
 }
@@ -73,7 +84,7 @@ vector<float> simulation(float T, float a_init, Environment &env)
 	vector<float> data(4);
 	vector<float> bacterias(2);
 	int clean = 0;
-	for (int t = 0 ; t <= 100; ++t)
+	for (int t = 0 ; t <= 10000; ++t)
 	{
 		env.diffusion();
 		env.death_of_cells();

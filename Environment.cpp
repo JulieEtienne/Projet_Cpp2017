@@ -277,15 +277,21 @@ void Environment::diffusion()
                     m == -1 ? (m = H-1) : 0;
                     m == H ? (m = 0) : 0;
 
-                    copy[x][y].A_out += D * grid[x][y].A_out;
-                    copy[x][y].B_out += D * grid[x][y].B_out;
-                    copy[x][y].C_out += D * grid[x][y].C_out;
+                    grid[x][y].A_out += D * copy[k][m].A_out;
+                    grid[x][y].B_out += D * copy[k][m].B_out;
+                    grid[x][y].C_out += D * copy[k][m].C_out;
+                    //copy[x][y].A_out += D * grid[x][y].A_out;
+                    //copy[x][y].B_out += D * grid[x][y].B_out;
+                    //copy[x][y].C_out += D * grid[x][y].C_out;
                 }
             }
             // End computations and update in grid :
-            grid[x][y].A_out = copy[x][y].A_out - 9 * D * grid[x][y].A_out;
-            grid[x][y].B_out = copy[x][y].B_out - 9 * D * grid[x][y].B_out;
-            grid[x][y].C_out = copy[x][y].C_out - 9 * D * grid[x][y].C_out;
+            grid[x][y].A_out -= 9 * D * copy[x][y].A_out;
+            grid[x][y].B_out -= 9 * D * copy[x][y].B_out;
+            grid[x][y].C_out -= 9 * D * copy[x][y].C_out;
+            //grid[x][y].A_out = copy[x][y].A_out - 9 * D * grid[x][y].A_out;
+            //grid[x][y].B_out = copy[x][y].B_out - 9 * D * grid[x][y].B_out;
+            //grid[x][y].C_out = copy[x][y].C_out - 9 * D * grid[x][y].C_out;
         }
     }
     //cout << "La diffusion est terminée." << endl;
