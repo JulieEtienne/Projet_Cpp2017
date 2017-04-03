@@ -24,7 +24,9 @@ using std::ofstream;
 //ofstream output;
 ofstream fs;
 // Create a name for the file output
-string filename = "resultats4.csv";
+==== BASE ====
+string filename = "resultats.csv";
+==== BASE ====
 
 int W;
 int H;
@@ -56,7 +58,9 @@ int main() {
     H = 32;
 	D = 0.1;
 
-	for (float a = 0; a <= 0.002; a += 0.0001)
+==== BASE ====
+	for (float a = 0; a <= 50; a += 10)
+==== BASE ====
 	{
 		environment_ = Environment(W, H, a, D);
 		for (float T = 1; T <= 1500; T += 100)
@@ -66,6 +70,7 @@ int main() {
 				d = simulation(T, a, environment_);
 				//for (auto &i:donnees) cout << i << endl;
 				fs << d[0] << "," << d[1] << "," << d[2] << "," << d[3] << endl;
+				cout << "T : " << T << "\t \t a : " << a << endl;
 			}
 		}
 	}
