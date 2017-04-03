@@ -13,7 +13,7 @@ using std::endl;
 //                    Definition of static attributes
 // ===========================================================================
 float Bacteria::w_min = 0.001;
-float Bacteria::p_mut = 0.01;
+float Bacteria::p_mut = 0.001;
 float Bacteria::p_death = 0.02;
 
 // ===========================================================================

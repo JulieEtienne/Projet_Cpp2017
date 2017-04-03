@@ -1,8 +1,10 @@
 #!/usr/bin/env Rscript
 
-png(file="resultats_mut_noD.png")
+nom <- "resultats_mut_D"
 
-data <- read.csv("Lresultats.csv",header = FALSE)
+png(file= paste(nom,"+.png",sep=""))
+
+data <- read.csv(paste(nom,".csv",sep=""),header = FALSE)
 data <- as.matrix(data)
 data
 
@@ -15,6 +17,6 @@ persp(A_init,t,data,theta=230,phi=15,xlab='[A]i',ylab='T',zlab='Nombre de bacté
 
 dev.off()
 
-png(file = "resultats_mut_noD-.png")
+png(file = paste(nom,"-.png",sep=""))
 persp(A_init,t,data,theta=-230,phi=15,xlab='[A]i',ylab='T',zlab='Nombre de bactéries',col="chartreuse1",expand=0.5,shade=0.8,ticktype="detailed")
 dev.off()
