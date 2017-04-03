@@ -57,7 +57,7 @@ int main() {
 
     W = 32;
     H = 32;
-	D = 0.1;
+	D = 0;
 
 	for (float a = 0; a <= 50; a += 10)
 	{
@@ -77,8 +77,6 @@ int main() {
 					fs << d[0] << ",";
 					fs2 << d[1] << ",";
 				}
-				//for (auto &i:donnees) cout << i << endl;
-				//fs << d[0] << "," << d[1] << "," << d[2] << "," << d[3] << endl;
 				cout << "T : " << T << "   \t a : " << a << "\t BacterieL : " << d[0] << endl;
 			//}
 		}
@@ -98,9 +96,9 @@ vector<float> simulation(float T, float a_init, Environment &env)
 	vector<float> data(4);
 	vector<float> bacterias(2);
 	int clean = 0;
-	for (int t = 0 ; t <= 100; ++t)
+	for (int t = 0 ; t <= 1000; ++t)
 	{
-		env.diffusion();
+		env.diffusion(); // --> OK
 		env.death_of_cells();
     	env.search_and_fill_gaps();
     	env.metabolism_of_cells();

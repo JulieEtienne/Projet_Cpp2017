@@ -297,11 +297,14 @@ void Environment::death_of_cells()
     {
         for (int j = 0; j < H; ++j)
         {
-            grid[i][j].bac->dead_or_alive();
-            // If the Bacteria is dead, do the necessary things to deal with it
-            if (grid[i][j].bac->get_is_alive() == false)
+            if (grid[i][j].amI_Empty() == false)
             {
+                grid[i][j].bac->dead_or_alive();
+                // If the Bacteria is dead, do the necessary things to deal with it
+                if (grid[i][j].bac->get_is_alive() == false)
+                {
                 grid[i][j].bac_IsDead();
+                }
             }
         }
     }
