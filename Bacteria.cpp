@@ -107,7 +107,11 @@ void Bacteria::fitness()
     {
         w = C;
     }
-    w < w_min ? w = 0 : 0;
+    if (w < w_min)
+        {
+            w=0;
+        }
+    //w < w_min ? w = 0 : 0;
 }
 
 void Bacteria::dead_or_alive()
