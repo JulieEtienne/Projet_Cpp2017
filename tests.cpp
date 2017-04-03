@@ -24,7 +24,7 @@ using std::ofstream;
 //ofstream output;
 ofstream fs;
 // Create a name for the file output
-string filename = "resultats.csv";
+string filename = "resultats3.csv";
 
 int W;
 int H;
@@ -42,11 +42,11 @@ int main() {
 	// Write the headers :
 	fs << "L" << "," << "S" << "," << "A_init" << "," << "T" << endl;
 
-    W = 10;
-    H = 10;
+    W = 32;
+    H = 32;
 	D = 0.1;
 
-	for (float a = 0; a <= 50; a += 10)
+	for (float a = 0; a <= 0.1; a += 0.01)
 	{
 		environment_ = Environment(W, H, a, D);
 		for (float T = 1; T <= 1500; T += 100)
@@ -56,6 +56,7 @@ int main() {
 				d = simulation(T, a, environment_);
 				//for (auto &i:donnees) cout << i << endl;
 				fs << d[0] << "," << d[1] << "," << d[2] << "," << d[3] << endl;
+				cout << "T : " << T << "\t \t a : " << a << endl;
 			}
 		}
 	}
@@ -73,7 +74,7 @@ vector<float> simulation(float T, float a_init, Environment &env)
 	vector<float> data(4);
 	vector<float> bacterias(2);
 	int clean = 0;
-	for (int t = 0 ; t <= 100; ++t)
+	for (int t = 0 ; t <= 10000; ++t)
 	{
 		env.diffusion();
 		env.death_of_cells();
