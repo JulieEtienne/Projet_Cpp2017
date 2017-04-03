@@ -25,7 +25,7 @@ using std::ofstream;
 ofstream fs;
 // Create a name for the file output
 ==== BASE ====
-string filename = "resultats.csv";
+string filename = "resultats3.csv";
 ==== BASE ====
 
 int W;
@@ -57,23 +57,22 @@ int main() {
     W = 32;
     H = 32;
 	D = 0.1;
-
-==== BASE ====
-	for (float a = 0; a <= 50; a += 10)
-==== BASE ====
-	{
+int a=10;
+int T=500;
+	/*for (float a = 0; a <= 0.002; a += 0.0002)
+	{*/
 		environment_ = Environment(W, H, a, D);
-		for (float T = 1; T <= 1500; T += 100)
-		{
+		/*for (float T = 1; T <= 1500; T += 100)
+		{*/
 			for (int time = 0; time < 1; ++time)
 			{
 				d = simulation(T, a, environment_);
 				//for (auto &i:donnees) cout << i << endl;
 				fs << d[0] << "," << d[1] << "," << d[2] << "," << d[3] << endl;
-				cout << "T : " << T << "\t \t a : " << a << endl;
+				cout << "T : " << T << "  \t \t a : " << a << "\t BacterieS : " << d[0] << endl;
 			}
-		}
-	}
+		//}
+	//}
 
 	// Close the file
 	fs.close();
@@ -94,7 +93,7 @@ vector<float> simulation(float T, float a_init, Environment &env)
 		env.diffusion();
 		env.death_of_cells();
     	env.search_and_fill_gaps();
-    	env.metabolism_of_cells();
+    	//env.metabolism_of_cells();
     	env.maj_fitness();
 		//env.display();
 		if (clean == T)
