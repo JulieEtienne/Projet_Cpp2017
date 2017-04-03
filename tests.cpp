@@ -24,7 +24,9 @@ using std::ofstream;
 //ofstream output;
 ofstream fs;
 // Create a name for the file output
-string filename = "resultats4.csv";
+==== BASE ====
+string filename = "resultats3.csv";
+==== BASE ====
 
 int W;
 int H;
@@ -39,8 +41,18 @@ int main() {
 
 	// Create and open the .csv file
 	fs.open(filename);
-	// Write the headers :
-	fs << "L" << "," << "S" << "," << "A_init" << "," << "T" << endl;
+	// Check the good opening of the file
+	if (fs.is_open())
+	{
+		cout << "File successfully opened" << endl;
+		// Write the headers :
+		fs << "L" << "," << "S" << "," << "A_init" << "," << "T" << endl;
+	}
+	else
+	{
+		cout << "Error while opening" << endl;
+		return -1;
+	}
 
     W = 32;
     H = 32;
@@ -65,7 +77,8 @@ int T=500;
 	// Close the file
 	fs.close();
 
-	//std::system(std::to_string("results.R ./filename"));
+	//string system_str = "Rscript results.R blah.pdf";
+	//std::system(system_str);
 
     return EXIT_SUCCESS;
 }
@@ -82,7 +95,7 @@ vector<float> simulation(float T, float a_init, Environment &env)
     	env.search_and_fill_gaps();
     	//env.metabolism_of_cells();
     	env.maj_fitness();
-		env.display();
+		//env.display();
 		if (clean == T)
 		{
     		env.clean_envir();
